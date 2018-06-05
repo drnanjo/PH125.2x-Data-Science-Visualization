@@ -274,3 +274,51 @@ would be considered a numerical variable.
 
 #### Section 1: Introduction to Data Visualization and Distributions >  1.1 Introduction to Data Visualization  > Introduction to DataCamp
 
+### DataCamp
+
+You are about the take the first assessment. In this course we will be using the 
+DataCamp platform for all assessments. DataCamp provides an R console and and a 
+script editor right here on your browser.  This is why installing R is not required 
+for this course. Here we give a brief DataCamp tutorial. If you are already familiar 
+with DataCamp you can skip this section and proceed to the next section
+
+To start an DataCamp assessment, you will click on the button that says Click 
+here to start the assessment, which looks like this: picture of start the assessment 
+button. You will see button like this one in the next section: Assessment 1.1: Data Types.
+
+The DataCamp interface has four panels. They are:
+
+* The Information Panel: General information about the assessment.
+* The Instructions Panel: Exercise instructions. The multiple choice questions appear here when applicable.
+* The Editor: Here is where you type and edit your answers in the form of an R script. Example code also appears here. The editor also includes reminders of the instructions.  Note that # denotes comments. These are not run as code, instead, they tell others what your code is about! 
+* R console: This is where R commands get executed. You can send commands from the editor to the console but you can also type in commands directly to test out code.
+
+There are two ways to send commands from the editor to the console:
+
+1) If you hit the  Submit Answer button, the entire code in the editor gets executed 
+and your answer is evaluated. Remember, after you click Submit Answer in an assessment, 
+your code will be evaluated. If you do not take the hint, you get unlimited tries.
+
+2) If your cursor is on the editor and you hit command-return on a Mac or control-return 
+on Windows, that line gets executed in the console. You do not submit an answer when 
+you do this. This is a good way to test your script before you submit.
+
+Tip: DataCamp suggests useful keyboard shortcuts after most exercises.
+
+---
+
+#### Section 1: Introduction to Data Visualization and Distributions >  1.1 Introduction to Data Visualization  > Assessment: Data Types
+
+The button below will open a link to DataCamp, a learn-to-code company that is 
+serving up all of the assignments for Data Science: Visualization. This first 
+assignment reviews different data types.
+
+Once you've opened the new window, you will see instructions to the left and the 
+editor to the right, where you can type R code to solve the exercises. Remember 
+the # denotes comments that are not run as code. You can also execute R commands 
+in the console (below the editor). If you want to experiment with R code, type 
+directly into the console. When you are ready to be graded, type into the editor 
+and hit the 'Submit Answer' button.
+
+
+
