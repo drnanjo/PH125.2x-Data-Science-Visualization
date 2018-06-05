@@ -17,7 +17,7 @@ We encourage you to use R to interactively test out your answers and further you
 
 #### Section 1: Introduction to Data Visualization and Distributions  > 1.1 Introduction to Data Visualization  > Introduction to Data Visualization
 
-![Introduction to Data Visualization](https://youtu.be/nBDQJ4moaNY)
+[Introduction to Data Visualization](https://youtu.be/nBDQJ4moaNY)
 
 Exploratory Data Analysis
 
@@ -110,5 +110,89 @@ We will use the **ggplot2** package to code.
 
 ---
 
-#### Section 1: Introduction to Data Visualization and Distributions   1.1 Introduction to Data Visualization   Installing R and RStudio
+#### Section 1: Introduction to Data Visualization and Distributions >  1.1 Introduction to Data Visualization >  Installing R and RStudio
+
+For this course, you do not need to install R because we're using DataCamp for 
+all of the assignments. You will learn about how to use DataCamp's platform soon. 
+However, for those who want to try code on your own computer, include links to 
+instructions for installing and RStudio below. If you do not want to install R 
+at this moment please proceed to the next section.
+
+**Installing R**
+If you want to install R to work on your own computer, you can download it freely 
+from the Comprehensive R Archive Network (CRAN). Note that CRAN makes several 
+versions of R available:  versions for multiple operating systems and releases 
+older than the current one. You want to read the CRAN instructions to assure you 
+download the correct version. If you need further help, you can try the following 
+resources:
+
+Installing R on Windows
+Installing R on Mac
+Installing R on Ubuntu
+
+**Installing RStudio**
+
+RStudio is an integrated development environment (IDE). We highly recommend 
+installing and using RStudio to edit and test your code. You can install RStudio 
+through the RStudio website. Their ![cheatsheet](https://www.rstudio.com/wp-content/uploads/2016/01/rstudio-IDE-cheatsheet.pdf)
+is a great resource. You need to install R first.
+
+
+---
+
+#### Section 1: Introduction to Data Visualization and Distributions >  1.1 Introduction to Data Visualization >  Introduction to Distributions
+
+### Introduction to Distributions
+
+[Introduction to Distributions](https://youtu.be/MQlovC1SP0k)
+
+**Average Score**
+
+> 650
+
+**Standard Deviation**
+
+> 650 +- 50
+
+Note that the report has summarized an entire vector of scores
+with just two numbers.
+
+It turns out that in some cases, these two numbers
+are pretty much all we need to understand the data.
+Data visualization techniques will help us determine when
+this two-number summary is appropriate.
+
+These same techniques will serve as alternatives for when
+these two numbers are not enough.
+
+Our first data visualization building block is learning to 
+summarize list of factors or numeric vectors.
+
+The most basic statistical summary of a list of objects or 
+numbers is its **distribution**.
+
+
+> RAFAEL IRIZARRY: You may have noticed that numerical data is often
+> summarized with an average value. For example, the quality of a high
+> school is sometimes summarized with one number-- the average score in
+> a standardized test. Occasionally, a second number is reported as
+> well-- the standard deviation. So, for example, you might read a
+> report stating that scores at this high school were 680 plus or minus
+> 50. The last number is the standard deviation. Note that the report has summarized an entire vector of scores with just two numbers. Is
+> this appropriate? Is there any important piece of information we're
+> missing by only looking at this summary rather than the entire list?
+> It turns out that in some cases, these two numbers are pretty much all
+> we need to understand the data. Data visualization techniques will
+> help us determine when this two-number summary is appropriate. These
+> same techniques will serve as alternatives for when these two numbers
+> are not enough. Our first data visualization building block is
+> learning to summarize lists of factors or numeric vectors. The most
+> basic statistical summary of a list of objects or numbers is its
+> distribution. Once a vector has been summarized as a distribution,
+> there are several data visualization techniques to effectively relay
+> this information.
+
+---
+
+#### Section 1: Introduction to Data Visualization and Distributions >  1.1 Introduction to Data Visualization >  Data Types
 
