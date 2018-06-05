@@ -134,7 +134,7 @@ Installing R on Ubuntu
 
 RStudio is an integrated development environment (IDE). We highly recommend 
 installing and using RStudio to edit and test your code. You can install RStudio 
-through the RStudio website. Their ![cheatsheet](https://www.rstudio.com/wp-content/uploads/2016/01/rstudio-IDE-cheatsheet.pdf)
+through the RStudio website. Their [cheatsheet](https://www.rstudio.com/wp-content/uploads/2016/01/rstudio-IDE-cheatsheet.pdf)
 is a great resource. You need to install R first.
 
 
@@ -195,4 +195,82 @@ numbers is its **distribution**.
 ---
 
 #### Section 1: Introduction to Data Visualization and Distributions >  1.1 Introduction to Data Visualization >  Data Types
+
+[Data Types](https://youtu.be/0lgyJaM6_PI)
+
+We will be working with two types of variables:
+* categoricals (Variables that are defined by a small number of groups)
+* and numericals.
+
+Each can be divided into two further groups.
+**Categoricals** can be divided into:
+* ordinals (can be ordered)
+* and non-ordinals.
+
+And **numerical** variables can be divided into:
+* discrete 
+* or continuous (those that can take any value such as heights).
+
+Some **categorical** data can be ordered, for example, spiciness can be mild, medium, or hot.
+Even if they are not numbers per se, they can still be ordered.
+In statistics textbooks they sometimes refer to these as **ordinal data**.
+
+The other data type are **numericals**. Examples that we have seen or will see 
+are population sizes, murder rates, and heights.
+
+Counts such as population sizes are discrete because they have to be round numbers.
+
+Note that discrete numeric data can be considered ordinal.
+An example are heights rounded to the nearest inch.
+
+Although this is technically true, we usually reserve the term **"ordinal data"** for variables
+belonging to a small number of different groups with each group having many members.
+In contrast, when we have many groups with few cases in each group,
+we typically refer to this as **discrete numerical variables**.
+
+
+So for example, the number of packs of cigarettes a person smokes a day
+rounded to the closest pack --so 0, 1, or 2-- would be considered ordinal.
+While the number of cigarettes that we smoke --0, 1, 2, 3 up to maybe 36--
+would be considered a numerical variable.
+
+
+
+
+> RAFAEL IRIZARRY: An important first step in deciding how to visualize
+> data is to know what type of data it is. We will be working with two
+> types of variables-- categoricals and numericals. Each can be divided
+> into two further groups. Categoricals can be divided into ordinals and
+> non-ordinals. And numerical variables can be divided into discrete or
+> continuous. Variables that are defined by a small number of groups we
+> call categorical data. Two simple examples are sex, male or female, or
+> regions of the states that we looked at in the first of course--
+> Northeast, South, North Central, West. Some categorical data can be
+> ordered. For example, spiciness can be mild, medium, or hot. Even if
+> they are not numbers per se, they can still be ordered. In statistics
+> textbooks they sometimes refer to these as ordinal data. The other
+> data type are numericals. Examples that we have seen or will see are
+> population sizes, murder rates, and heights. We can further divide
+> numerical data into continuous and indiscreet. Continuous variables
+> are those that can take any value such as heights if measured with
+> enough precision. For example, a pair of twins maybe 68.12 inches and
+> 68.11 inches respectively. Counts such as population sizes are discrete because they have to be round numbers. Note that discrete
+> numeric data can be considered ordinal. An example are heights rounded
+> to the nearest inch. Although this is technically true, we usually
+> reserve the term "ordinal data" for variables belonging to a small
+> number of different groups with each group having many members. In
+> contrast, when we have many groups with few cases in each group, we
+> typically refer to this as discrete numerical variables. So for
+> example, the number of packs of cigarettes a person smokes a day
+> rounded to the closest pack-- so 0, 1, or 2-- would be considered
+> ordinal. While the number of cigarettes that we smoke-- 0, 1, 2, 3 up
+> to maybe 36-- would be considered a numerical variable. But indeed,
+> these examples can be considered both when it comes to data
+> visualization. Now that we've learned about the different data types,
+> we're ready to learn about data visualization techniques.
+
+
+---
+
+#### Section 1: Introduction to Data Visualization and Distributions >  1.1 Introduction to Data Visualization  > Introduction to DataCamp
 
