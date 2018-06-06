@@ -322,3 +322,124 @@ and hit the 'Submit Answer' button.
 
 
 
+---
+
+#### Section 1: Introduction to Data Visualization and Distributions >  1.2 Introduction to Distributions  > Describe Heights to ET
+
+[Describe Heights to ET](https://youtu.be/crIyZUrabeI)
+
+Pretend that we have to describe the heights of our classmates
+to ET, an extraterrestrial that has never seen humans.
+
+To do this, we asked students to report their heights in inches.
+We asked them to provide sex information because we
+know there are two different groups of heights, males and females.
+We collect the data and save it in a data frame.
+
+To simplify the explanation at first, we focus on male heights.
+The most basic statistical summary of a list of objects or numbers
+is its **distribution**.
+
+The simplest way to think of a distribution
+is as a compact description of a list with many elements.
+
+For example, with categorical data, the distribution
+simply describes the proportions of each unique category.
+For example, the sex represented in the heights data set
+can be summarized by the proportions of each of the two categories,
+female and male.
+
+This two category **frequency table** is the simplest form
+of a distribution we can form.
+
+When there are more categories, then a simple bar plot
+describes the distribution.
+
+Although this particular plot, a graphical representation of a frequency
+table, does not provide much more insights than the table itself,
+it is a first example of how we convert a vector
+into a visualization that succinctly summarizes
+all the information in that vector.
+
+When the data is numerical, the task is much more challenging.
+Well, in general, when data is not categorical,
+reporting the frequency of each unique entry
+is not an effective summary since most entries are unique.
+
+
+Statistics textbooks teach us that a more useful way
+to define a distribution for numerical data
+is to define a function that reports the proportion of the data
+below a value A for all possible values of A.
+
+This function is called a **Cumulative Distribution Function** or **CDF**.
+
+```
+F(a) = Pr(x <= a)
+
+Pr, meaning proportion or probability,
+and then in parentheses the event that we require, x less than a.
+```
+
+Here's a plot of the function f for the height data.
+**Like the frequency table does for categorical data,
+the CDF defines the distribution for numerical data**.
+
+
+![image](https://user-images.githubusercontent.com/16638078/41053789-83e76dbc-698a-11e8-92f2-8a3360059077.png)
+
+We also see that 84% of our students have heights below 72 inches.
+
+![image](https://user-images.githubusercontent.com/16638078/41053940-fa4f3c96-698a-11e8-8f6b-af69d519d782.png)
+
+
+In fact, we can report the proportion of values between any two heights,
+say a and b, by computing f of e, and then subtracting f of a.
+
+```
+F(b) - F(a)
+```
+
+Final note, because CDFs can be determined mathematically,
+as opposed to using data as we do here, the word empirical
+is added to distinguish, and we use the term empirical CDF or ECDF.
+
+Although the CDF provides all the information we need and it is widely
+discussed in statistics textbooks, the plot
+is actually not very popular in practice.
+
+The main reason is that it does not easily
+convey characteristics of interest, such as,
+at what value is the distribution centered,
+is the distribution symmetric, what range contains 95% of the data.
+We can decipher all this from the plot, but it's not that easy.
+
+
+**Histograms** are much preferred because they greatly
+facilitate answering such questions.
+Histograms sacrifice just a bit of information
+to produce plots that are much easier to interpret.
+
+The simplest way to make a histogram is to divide a span of our data
+into non-overlapping bins of the same size.
+
+Then for each bin, we count the number of values that fall in that interval.
+The histogram plots these counts as bars with the base of the bar the interval.
+
+![image](https://user-images.githubusercontent.com/16638078/41054130-835f9666-698b-11e8-9376-2685d94b0e4f.png)
+
+
+So why is it an approximation?
+What information do we lose?
+Note that all values in each interval are treated as the same
+when computing the bin heights.
+So for example, the histogram does not distinguish
+between 64, 64.1, and 64.2 inches.
+Given that these differences are almost unnoticeable to the eye,
+in this particular case, the practical implications are negligible.
+
+---
+
+#### Section 1: Introduction to Data Visualization and Distributions   1.2 Introduction to Distributions   Smooth Density Plots
+
+
