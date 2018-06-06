@@ -443,3 +443,101 @@ in this particular case, the practical implications are negligible.
 #### Section 1: Introduction to Data Visualization and Distributions   1.2 Introduction to Distributions   Smooth Density Plots
 
 
+Smooth Density Plots
+
+Smooth density plots are similar to histograms,
+but are aesthetically more appealing.
+
+Note that we no longer have sharp edges at the interval boundaries
+and that many of the local peaks have been removed.
+Also notice that the scale of the y-axis changed from counts to something
+new called **density**.
+
+To understand the smooth densities, we have
+to understand estimates, a topic we don't cover until later.
+However, we provide a heuristic explanation
+to help you understand the basics, and so you
+can use this useful data visualization tool and learn how to interpret it.
+
+The main new concept you have to understand
+is that we assume that our list of observed values of observed heights
+comes from a much, much larger list of unobserved values.
+
+Because we're assuming that we have a million values measured very precisely,
+we can make a histogram with very, very small bits.
+This is going to help us understand what smooth densities are.
+The assumption is that if we do this, consecutive bins will be similar.
+This is what we mean by smooth.
+We don't have big jumps from bin to bin.
+
+To make the curve not depend on the hypothetical size
+of the hypothetical list, we compute the curve on the **frequency scale**
+rather than the **count scale**.
+
+Because it is a small sample, we get unsmooth variation in these heights.
+To smooth the histogram what we're going to do
+is we're going to start by keeping the heights of the histogram bar shown here
+with little points.
+We keep these points.
+And now we draw a smooth curve that goes through the top
+of these histograms bars.
+
+Before we continue, note that smooth is a relative term.
+We can actually control the smoothness of the curve that
+defines a smooth density through an option in the function, the GG plot
+option that computes the smooth density.
+
+![image](https://user-images.githubusercontent.com/16638078/41055061-3964da1e-698e-11e8-9c53-b486bb2b9f1c.png)
+
+
+We need to make this choice with care, as a result of visualization
+can change our interpretation of the data.
+We should select a degree of smoothness that we
+can defend as being representative of the underlying data.
+
+Always keep in mind that while the histogram is an assumption
+free summary, the smooth density is based on assumptions and choices
+that you make as a data analyst.
+
+Finally, to be able to interpret density plots,
+we need to understand the units of the y-axis.
+We point out that interpreting the y-axis of a smooth density plot
+is not straightforward.
+It is scaled so that the area under the density curve adds up to 1.
+
+![image](https://user-images.githubusercontent.com/16638078/41055216-a43976a6-698e-11e8-8b8a-2a43d4846c17.png)
+
+
+So if you imagine, you form a bin with a base that is 1 unit long.
+The y-axis value tells us the proportion of values in that bin.
+But this is only true if the bin is of size 1.
+For other size intervals, the best way to determine the proportion of data
+in that interval is by computing the proportion of the total area contained
+in that interval.
+Here's an example, if we take the proportion of values between 65 and 68,
+it'll equal the proportion of the graph that is in that blue region
+that we're showing you right there.
+The proportion of this area is about 0.31, meaning that about 31%
+of our values are between 65 and 68 inches.
+
+![image](https://user-images.githubusercontent.com/16638078/41055297-d5adb134-698e-11e8-89af-17ecf4b4d1f8.png)
+
+
+As a final note, we point out that an advantage
+of smooth densities over histograms is that it makes it easier
+to compare to distribution.
+This is in large part because the jagged edges of the histogram add clutter,
+so when we're comparing two histograms, it makes it a little bit hard to see.
+Here's an example of what it looks like when you use density plots.
+With the right argument, GG plot automatically
+shades the intersecting regions with different colors.
+So it makes it very easy to get an idea of what the two distributions are.
+
+![image](https://user-images.githubusercontent.com/16638078/41055397-2bc8cf04-698f-11e8-9dcd-a19065c954ed.png)
+
+
+---
+
+#### Section 1: Introduction to Data Visualization and Distributions >  1.2 Introduction to Distributions  > Normal Distribution
+
+
