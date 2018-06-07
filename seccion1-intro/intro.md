@@ -541,3 +541,126 @@ So it makes it very easy to get an idea of what the two distributions are.
 #### Section 1: Introduction to Data Visualization and Distributions >  1.2 Introduction to Distributions  > Normal Distribution
 
 
+We often see the average and the standard deviation
+used as a summary statistic for a list of numbers, a two number summary.
+To understand what these summaries are and why they are so widely used,
+we need to understand the **normal distribution**.
+The normal distribution, also known as the **bell curve**
+and as the **Gaussian distribution**, is one of the most famous
+mathematical concepts in history.
+
+A reason for this is that approximately normal distributions
+occur in many situations.
+Examples include, gambling winnings, heights, weights, blood pressure,
+standardized test scores, and experimental measurement error.
+
+Here we focus on how the normal distribution helps us summarize data.
+Rather than using data, the normal distribution
+is defined with a mathematical formula.
+
+![image](https://user-images.githubusercontent.com/16638078/41120090-83497002-6a62-11e8-9f63-d87db2f93747.png)
+
+
+ note that it is completely defined by just 2 parameters, m and s.
+
+These two parameters, m and s, are referred to as the average, also
+call the mean, that's why we use the letter m,
+and the standard deviation of the distribution respectively.
+
+The distribution is symmetric, centered at the average,
+and most values, about 95%, are within two standard deviations
+from the average.
+
+![image](https://user-images.githubusercontent.com/16638078/41120228-e172f676-6a62-11e8-9e48-692cd2177346.png)
+
+
+Here's what the distribution looks like when the average is zero
+and the standard deviation is one.
+
+The fact that the distribution is defined by just two parameters
+implies that if a dataset is approximated by a normal distribution,
+all information needed to describe this distribution
+can be encoded in just two numbers, the average and the standard deviation,
+
+For a list of numbers contained in a vector that we'll call x,
+the average is simply defined as a sum of x divided by the length of x.
+
+    > average <- sum(x) / length(x)
+
+And the Standard deviation is defined with the following formula
+
+    > SD <- sqrt( sum( (x-average)^2 ) / length(x) )
+
+It's the square root of the sum of the differences between the values
+and the mean squared divided by the length.
+You can think of this as the average distance
+between the values and their average.
+
+```
+index <- heights$sex=="Male"
+x <- heights$height[index]
+```
+We can use prebuilt functions to calculate average and standard deviation
+
+```
+average <- mean(x)
+SD <- sd(x)
+c(average1=average, SD1=SD)
+```
+
+So here is a plot of the smooth density of our male heights.
+We're making no assumptions here, other than assuming it's somewhat smooth.
+
+![image](https://user-images.githubusercontent.com/16638078/41120772-8c0d56ac-6a64-11e8-8711-d1f6cd6c6a47.png)
+
+And then overlaid with a black curve is the normal distribution
+that has average 69.44, and standard deviation 3.27.
+
+![image](https://user-images.githubusercontent.com/16638078/41120828-b8a1ad3a-6a64-11e8-9aab-7c723b52183c.png)
+
+
+Note how close those two are.
+This is telling us that **the normal distribution approximate
+the distribution of our male heights**.
+
+Before we continue, let's introduce the concept of **standard units**.
+
+For data that is approximately normal, it
+is convenient to think in terms of standard units.
+The standard unit of value tells us how many standard deviations away
+from the average this value is.
+
+    z = (x - average) / SD
+
+To understand why standard units are useful,
+notice that if we convert normally distributed data into standard units,
+we can quickly know if for example, a person is about average height, that
+would mean z equals 0.
+A person that is tall would be z equals 2.
+A person that is short would be z equals negative 2.
+And extremely rare occurrences, say a 7 footer or something like that,
+would have a z bigger than 3.
+
+In R, we can quickly obtain standard units using the function scale.
+Type in this code.
+
+    > z <- scale(x)
+
+To see how many men are within two standard deviations from the average,
+
+    > mean(abs(z) < 2)
+    [1] 0.950565
+
+If we can assume that the data is approximately normal,
+at least for this interval, we can predict the proportion
+without actually looking at the data.
+We simply know that 95% of the data for normally
+distributed data is between negative 2 and 2.
+Now to further confirm that in fact the approximation is a good one,
+we need to look at other intervals.
+And for this, we will use **quantile plots**.
+
+---
+
+#### Section 1: Introduction to Data Visualization and Distributions   1.2 Introduction to Distributions   Assessment: Distributions
+
