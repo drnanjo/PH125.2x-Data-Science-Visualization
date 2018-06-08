@@ -786,3 +786,65 @@ which are obtained when we set p to be 0.25, 0.50, and 0.75.
 
 #### Section 1: Introduction to Data Visualization and Distributions   1.3 Quantiles, Percentiles, and Boxplots   Boxplots
 
+### Boxplots
+
+[Boxplots](https://youtu.be/NsSCLGnL6Dw)
+
+
+Suppose we want to summarize the murder rate distribution.
+Using the data visualization techniques we have learned,
+we notice that the normal approximation does not apply here.
+
+
+![image](https://user-images.githubusercontent.com/16638078/41179410-9ff750b2-6b38-11e8-88da-221c30b59842.png)
+
+
+In this case, the histogram or smooth density plot,
+would serve as a relatively succinct summary.
+
+Now suppose you were trying to describe this data to someone
+who is used to receiving just two numbers, the average
+and the standard deviation.
+In this case, that's not an appropriate summary,
+but they still want something compact.
+Here, John Tookey offers some advice.
+
+> Provide a five number summary composed of the range along with the quartiles, 25th, 50oth, and 75th percentile.
+
+Tookey further suggests that we ignore **outliers** when computing the range,
+and instead plot these as independent points.
+We provide a detailed explanation of outliers later.
+
+
+Finally, he suggests that we plot this five number summary
+as a box with whiskers like this.
+
+
+The box is defined by the 25th and 75th percentiles,
+and the whiskers are showing the range.
+
+![image](https://user-images.githubusercontent.com/16638078/41179582-2505ea8e-6b39-11e8-83e9-39b247c2ade1.png)
+
+The distance between these two percentiles
+is called the interquartile range.
+
+
+
+The two points that are outliers according to Tookey's definition,
+those are shown separately, and the median is shown with a horizontal line.
+
+Today, we call these boxplots.
+
+Boxplots are even more useful when we want to quickly compare
+two or more distributions.
+For example, here are the heights for men and women
+from our self-reported heights from previous videos.
+
+![image](https://user-images.githubusercontent.com/16638078/41179667-7d2d9090-6b39-11e8-9884-7b78e0924863.png)
+
+
+
+---
+
+#### Section 1: Introduction to Data Visualization and Distributions   1.3 Quantiles, Percentiles, and Boxplots   Distribution of Female Heights
+
