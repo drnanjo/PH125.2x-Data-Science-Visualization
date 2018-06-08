@@ -664,3 +664,99 @@ And for this, we will use **quantile plots**.
 
 #### Section 1: Introduction to Data Visualization and Distributions   1.2 Introduction to Distributions   Assessment: Distributions
 
+#### Section 1: Introduction to Data Visualization and Distributions   1.3 Quantiles, Percentiles, and Boxplots   Quantile-Quantile Plots
+
+### Quantile-Quantile Plots
+
+In a previous video, we described
+how, if a distribution is well approximated
+by the normal distribution, we can have a very useful and short summary.
+But to check if, in fact, it is a good approximation,
+we can use **quantile-quantile plots**, or **q-q plots**.
+
+We start by defining a series of proportion, for example, p equals 0.05,
+0.10, 0.15, up to 0.95.
+
+```
+p = 0.05
+p = 0.1
+p = 0.15
+...
+p = 0.95
+```
+
+Once this is defined for each p, we determine the value q,
+so that the proportion of the values in the data below q is p.
+
+**The q's are referred to as the quantiles.**
+
+To give a quick example, for the male heights
+data that we showed in previous videos, we have that 50% of the data
+is below 69.5 inches.
+
+
+    > mean(x <= 69.5)
+    [1] 0.5042373
+
+So this means that if p equals 0.5, then the q associated with that p is 69.5.
+
+    if p = 0.5,
+    then q = 69.5
+   
+Now, we can make this computation for a series of p's.
+If the quantiles for the data match the quantiles for the normal distribution,
+then it must be because the data is approximated by a normal distribution.
+
+    > p <- seq(0.05, 0.95, 0.05)
+
+To obtain the quantiles for the data, we can use the quantile function
+in r like this.
+
+    > observed_quantiles <- quantile(x,p)
+
+To obtain the theoretical normal distribution quantiles
+with the corresponding average and standard deviation,
+we use the qnorm function, like this.
+
+    > theoretical_quantiles <- qnorm( p, mean = mean(x), sd = sd(x) )
+
+
+To see if they match or not, we can plot them against each other,
+and then draw an identity line to see if the points fall on the line.
+
+    > plot(theoretical_quantiles, observed_quantiles)
+    > abline(0,1)
+
+![image](https://user-images.githubusercontent.com/16638078/41176462-7575c45e-6b2e-11e8-9e1f-84c03aa6b2d4.png)
+
+
+Note that the points fall almost on the line,
+meaning that the normal approximation is a pretty good approximation.
+
+
+Now, one final note.
+This code becomes slightly simpler if we use standard units.
+If we use standard units, we don't have to define
+the mean and the standard deviation in the function qnorm.
+So the code simplifies and looks like this.
+
+    > observed_quantiles <- quantile(z, p)
+    > theoretical_quantiles <- qnorm(p)
+    > plot(theoretical_quantiles, observed_quantiles)
+    > abline(0,1)
+
+Now, using the histogram, the density plots, and the q-q plots,
+we have become convinced that the male height data is well approximated
+with a normal distribution.
+So in this case, we can report back to ET a very succinct summary.
+Male heights **follow a normal distribution*,
+with an *average of 69.44 inches**, and a **standard deviation of 3.27 inches**.
+With this information, ET will have everything
+he needs to know to describe, and know what to expect,
+when he meets our male students.
+
+
+
+---
+
+#### Section 1: Introduction to Data Visualization and Distributions   1.3 Quantiles, Percentiles, and Boxplots   Percentiles
