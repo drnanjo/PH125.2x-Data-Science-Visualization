@@ -848,3 +848,49 @@ from our self-reported heights from previous videos.
 
 #### Section 1: Introduction to Data Visualization and Distributions   1.3 Quantiles, Percentiles, and Boxplots   Distribution of Female Heights
 
+### Distribution of Female Heights
+
+[Female Heights](https://youtu.be/2Z56SFmsG1I)
+
+Exploratory plots reveal that the approximation is not as useful.
+We can see it in the density plot or the q-q plot.
+We see something that we did not see for males.
+The density plot has a second bomb around 67.
+
+![image](https://user-images.githubusercontent.com/16638078/41179944-8a18380e-6b3a-11e8-914a-519c4452ba1d.png)
+
+Looks like a little shoulder.
+Also the q-q plot shows that the highest points tend to be taller than expected
+for the normal distribution.
+
+So when reporting back to ET, we might need
+to provide a histogram rather than just the average and the standard deviation
+for the female heights.
+
+If we look at other female height distributions from other sources,
+other than our self-reported heights, we do
+find that they are well approximated for the normal distribution.
+So why do we see a second hump in our data?
+
+Why do we see so many outliers, so many taller than expected women?
+Is our class a requirement for the female basketball team?
+Are small proportions of females claiming to be taller than they are?
+Another, perhaps more likely explanation,
+is that in the form students used to enter their heights,
+the internet form, female was the default sex,
+and some males may have entered their heights,
+but they forgot to change the sex variable.
+
+In this case, in our data set, some of the values that are supposedly
+from females are actually males.
+In any case, this is a good example of how
+data visualization has helped us discover a potential flaw in our data.
+
+---
+
+
+#### Section 1: Introduction to Data Visualization and Distributions   1.3 Quantiles, Percentiles, and Boxplots   Assessment: Quantiles, percentiles, and boxplots
+
+
+
+
