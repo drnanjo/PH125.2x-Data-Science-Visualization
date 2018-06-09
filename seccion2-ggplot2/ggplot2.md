@@ -133,5 +133,45 @@ We will now construct the plot piece by piece.
 #### Section 2: Introduction to ggplot2   2.1 Basics of ggplot2   Creating a New Plot
 
 
+### Creating a New Plot
 
+[Creating a New Plot](https://youtu.be/jd271tVwIm0)
+
+In this video, we will cover how to associate data
+with graph objects, geometries, and mappings.
+The first step in creating a ggplot graph is to define a ggplot object.
+We do this with a function ggplot, which initializes the graph.
+
+If we read the data file for this function,
+we see that the first argument is used to specify what
+data is associated with the object.
+This is the data component.
+
+So to initiate an object:
+
+    > ggplot(data = murders)
+
+This associates the data set with the plotting object.
+
+We can also pipe the data:
+
+    > murders %>% ggplot()
+
+We can define an object and store the plot:
+
+    > p <- ggplot(data = murders)
+
+If we look at the class of p, we see that it's a ggplot object.
+
+    > class(p)
+    [1] "gg" "ggplot"
+
+To render the plot associated with this object, we simply print the object p.
+
+    > print(p)
+    > p
+
+---
+
+#### Section 2: Introduction to ggplot2   2.1 Basics of ggplot2   Assessment: Robust Summaries with Outliers
 
