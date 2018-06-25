@@ -175,3 +175,99 @@ To render the plot associated with this object, we simply print the object p.
 
 #### Section 2: Introduction to ggplot2   2.1 Basics of ggplot2   Assessment: Robust Summaries with Outliers
 
+
+---
+
+#### Section 2: Introduction to ggplot2   2.2 Customizing Plots   Layers
+
+
+ In ggplot, we create graphs by adding layers.
+We add them component by component.
+Layers can define geometries, compute summary statistics,
+define what scales to use, and even change styles.
+To add layers, we use a symbol plus.
+
+    +
+
+In general, a line of code in ggplot will look like this.
+
+    DATA %>% ggplot() + LAYER 1 + LAYER 2 + ... +  LAYER N
+
+We'll have data, we pipe it into the ggplot command, and then we add layers.
+
+
+We want to make a scatterplot.
+
+Taking a quick look at the documentation,
+we see that the function used to create plots with this geometry is 
+
+    geom_point
+
+For geom point to know what to do, we need to provide data and a mapping.
+
+
+We have already connected an object with the mergers data table.
+And if we add, as a layer, geom point, we will default to using this data.
+
+`Aes` will be one of the functions that you will most use.
+We refer to this connection as the aesthetic mappings.
+
+There's where the name comes from, aes.
+the outcome of this function is often used
+as the argument of a geometry function.
+
+The following example produces a scatterplot
+of total learners versus population in millions.
+We pipe the mergers data set into ggplot,
+and then we add a layer with a geom point function.
+
+    > murders %>% ggplot() + geom_point(aes(x = population/10^6, y = total))
+
+Also note that in ggplot we can add layers to previously defined objects.
+
+    > p <- ggplot(data = murders)
+    > p + geom_point(aes(population/10^6, total))
+
+Note also that the scales and labels are defined
+by default when adding this layer.
+Finally, notice that we use the variable names from the object component,
+population and total, to label the axes.
+
+Note that aes recognizes the variable names from the data object.
+Keep in mind that this behavior is quite specific to aes.
+With most functions, if you try to access
+the values of population or total for example, outside of aes,
+you will receive an error.
+
+A second layer in the plot we wish to make
+involves adding a label to each point.
+This will help us identify which point goes with which state.
+
+
+    geom_label
+    geom_text
+
+Because each state, each point, has a label,
+we need an aesthetic mapping to make this connection.
+
+
+By reading the help file, we learn that we
+supply the mapping between point and label
+through the label argument of aes.
+So the code looks like this.
+
+    > p + geom_point(aes(population/10^6, total)) + 
+      geom_text(aes(population/10^6, total, label = abb))
+
+
+We add the points with geom point, and now we're
+going to add the text with geom text.
+The aesthetic mapping is the same, but now we add the label,
+and we're going to add the state abbreviations, which
+is stored in the abb variable.
+
+
+---
+
+#### Section 2: Introduction to ggplot2   2.2 Customizing Plots   Tinkering
+
