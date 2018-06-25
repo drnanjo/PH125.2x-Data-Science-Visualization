@@ -271,3 +271,73 @@ is stored in the abb variable.
 
 #### Section 2: Introduction to ggplot2   2.2 Customizing Plots   Tinkering
 
+
+
+If we read the documentation,
+we know that each geometry function has many arguments other than aes and data.
+They tend to be specific to the function.
+For example, in the plot we wish to make,
+the points are larger than the default ones.
+In the help file, we see that size is an aesthetic
+and we can change it using this code.
+We simply put size equals 3 outside the call to aes.
+
+    > p + geom_point(aes(population/10^6, total), size = 3) + 
+    +     geom_text(aes(population/10^6, total, label = abb))
+
+Unfortunately, now that the points are larger,
+we can't read the labels anymore.
+If we read the help file for geom text however,
+we see that there's an argument nudge underscore x, which lets
+us move the label just a little bit.
+So we can add that argument to the call to geom text.
+Notice that now we're adding an argument nudge x equals 1.
+
+    > p + geom_point(aes(population/10^6, total), size = 3) + 
+    +     geom_text(aes(population/10^6, total, label = abb), nudge_x = 1)
+
+We can actually make the code we've just shown more efficient.
+Note that in the previous lines of code, we
+have been mapping population and total to the points
+twice, once for each geometry.
+
+We can avoid this by adding what is called a global aesthetic mapping.
+
+Remember that the function ggplot contains an argument that permits
+us to define the aesthetic mappings.
+We can see it by typing args ggplot.
+
+    > args(ggplot)
+    function (data = NULL, mapping = aes(), ..., environment = parent.frame()) 
+    NULL
+
+If we define a mapping in ggplot, then all the geometries
+that are added as layers will default to this mapping.
+So we're going to redefine p, this time defining
+a mapping inside the ggplot function.
+
+
+    > p <- murders %>% ggplot(aes(population/10^6, total, label = abb)) 
+
+Also note that we kept size and nudge x in the geom point
+and geom text functions respectively.
+
+    > p + geom_point(size = 3) + geom_text(nudge_x = 1)
+
+
+Now, if we need to override the global mappings, we can do this.
+The local mappings override the global ones.
+
+    > p + geom_point(size = 3) + geom_text(aes(x=10, y=800, label="Hello there!"))
+
+If we type this code and we redefine a mapping inside the call the geom
+text, now when we see the plot that is produced,
+the labels are no longer there.
+Only the label assigned by that new local aesthetic mappings.
+
+
+
+---
+
+#### ection 2: Introduction to ggplot2   2.2 Customizing Plots   Scales, Labels, and Colors
+
