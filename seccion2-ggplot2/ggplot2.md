@@ -341,3 +341,152 @@ Only the label assigned by that new local aesthetic mappings.
 
 #### ection 2: Introduction to ggplot2   2.2 Customizing Plots   Scales, Labels, and Colors
 
+ our desired scales are in the log scale.
+This is not the default, so this change needs
+to be added through a scales layer.
+A quick look at the documentation reveals
+the `scale_x_continuous` function
+
+We can use this to edit the behavior of scales.
+We simply tell ggplot to use the log10 transformation for both the
+x and y-axis.
+
+```R
+> p + geom_point(size = 3) +
+geom_text(nudge_x = 0.1) +
+scale_x_continuous(trans = "log10") +
+scale_y_continuous(trans = "log10")
+```
+
+Note that because we're in the log scale now, the nudge must be made smaller.
+
+
+The log transformation is so common, that ggplot
+provides specialized functions.
+So we can make the previous code slightly more
+efficient by using the scale_x_log10 layer and the scale_y_log10 layer
+to make the scales be in the log scale.
+
+```R
+> p + geom_point(size = 3) +
+geom_text(nudge_x = 0.075) +
+scale_x_log10() +
+scale_y_log10()
+```
+
+Now that we have a scatterplot with the appropriate scales,
+we're ready to add some labels and titles.
+We can read the documentation which reveals that to change labels and add
+a title, we use the following function.
+* `xlab` can add a label to the x-axis.
+* `ylab` adds one to the y-axis.
+* And `ggtitle` adds a title.
+
+```
+> p + geom_point(size = 3) + 
+geom_text(nudge_x = 0.075) + 
+scale_x_log10() +
+scale_y_log10() +
+xlab("populations in millions (log scale)") +
+ylab("Total number of murders (log scale)") +
+ggtitle("US Gun Murders in US 2010")
+
+
+```
+
+Note that we can change the color of the points using the call
+argument in the geom point function.
+
+```
+p <- murders %>% ggplot(aes(population/10^6, total, label=abb)) +
+geom_text(nudge_x = 0.075) +
+scale_x_log10() +
+scale_y_log10() +
+xlab("Population in millions (log scale)") + 
+xlab("Total number of murders (log scale)") + 
+ggtitle("US Gun Murders in US 2010")
+
+```
+
+Now we can make all the points blue by simply adding a color argument.
+
+
+```
+p + geom_point(size = 3, color = "blue")
+```
+
+We want the colors to be associated with their geographical region.
+A nice default behavior of ggplot lets us do this.
+If we assign a categorical variable to the color argument,
+it automatically assigns a different color to each category.
+And it also adds a legend.
+
+```
+p + geom_point(aes(color=region), size = 3)
+```
+
+We also see another useful default behavior of ggplot.
+It has automatically added a legend that maps colors to region.
+
+
+```
+r <- murders %>% +
+summarize(rate = sum(total) + sum(population) * 10^6) %>% .$rate
+```
+
+We want to add a line that represents the average murder
+rate for the entire country.
+
+
+To compute the average rate for the entire country,
+we can use some of the dplyr skills we've learned.
+
+
+    r <- murders %>% + summarize(rate = sum(total) / sum(population) * 10^6) %>% .$rate
+
+To add a line, we use the geom abline function.
+ggplot uses ab in the name to remind us that we're supplying the intercept
+a the slope b.
+
+The default line for geom abline has slope 1 and intercept 0.
+So we only have to define the intercept.
+
+
+```
+p + geom_point(aes(col=region), size=3) + 
+geom_abline(intercept=log10(r))
+```
+
+
+To recreate the original plot we want to make,
+we have to change the line type from solid to dashed,
+change the color from black to grey, and also,
+we need to draw the line before the points.
+
+
+```
+> p <- p + 
+geom_abbline(intercept=log10(r), lty=2, color="darkgrey") +
+geom_point(aes(col=region), size=3)
+```
+
+that ggplot is very flexible, and there's almost always
+a way to achieve what you want.
+For example, there's a small change we need
+to make for our plot to match our original goal.
+And it's to capitalize the word region in the legend.
+
+
+To do this, we discover that the function scale_color_discrete
+lets us do this.
+
+    > p <- p + scale_color_discrete(name="Region")
+    
+    
+---
+
+#### Section 2: Introduction to ggplot2   2.2 Customizing Plots   Add-on Packages
+
+
+
+
