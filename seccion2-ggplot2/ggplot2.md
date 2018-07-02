@@ -339,7 +339,7 @@ Only the label assigned by that new local aesthetic mappings.
 
 ---
 
-#### ection 2: Introduction to ggplot2   2.2 Customizing Plots   Scales, Labels, and Colors
+#### section 2: Introduction to ggplot2   2.2 Customizing Plots   Scales, Labels, and Colors
 
  our desired scales are in the log scale.
 This is not the default, so this change needs
@@ -487,6 +487,84 @@ lets us do this.
 
 #### Section 2: Introduction to ggplot2   2.2 Customizing Plots   Add-on Packages
 
+The power of ggplot2 is further
+augmented thanks to the availability of add on packages.
+The remaining changes required to put the finishing touches on our plot
+requires the ggthemes and ggrepel packages.
 
+
+Let's start by changing the themes.
+The style of a ggplot graph can be changed using the theme function.
+Several themes are included as part of the ggplt2 package.
+In fact, for most of the plots in this series,
+we're using a theme that we define, and it's included in the DS Labs package,
+and you can get it by typing 
+
+    ds_theme_set()
+
+Many other themes can be added using the package ggthemes.
+Among those are the `theme_economist` that we use to make our original plot.
+
+After installing the package, you can change the style by adding a layer.
+We've already saved the plot in the p object, so now all we need to do
+is load the ggthemes library and then add
+a layer that is defined by the theme_economist.
+
+```
+> library(ggthemes)
+> p + theme_economist()
+```
+
+You can see how some of the other themes look by simply changing the function.
+For example, you might try the theme fivethirtyeight function
+to get a theme that looks like the fivethirtyeight web page.
+
+```
+> library(ggthemes)
+> p + theme_fivethirtyeight()
+```
+
+The final difference between the plot we have now and our final goal
+has to do with the positions of the labels.
+Note, that in our plot some of the labels fall on top of each other
+making it hard to read.
+
+
+The add-on package ggrepel includes a geometry
+that adds labels ensuring that they don't fall on top of each other.
+So all we need to do is change the geom_text layer
+with a `geom_text_repel` layer after loading the ggrepel package.
+
+So now, let's put it all together from scratch.
+
+```
+> install.packages("ggplot2")
+> install.packages("magrittr")
+> install.packages("ggthemes")
+> install.packages("ggrepel")
+
+> library(ggthemes)
+> library(ggrepel)
+> ### first define the slope of the line
+> r <- murders %>% + summarize(rate = sum(total) / sum(population) * 10^6) %>% .$rate
+> ### now make the plot
+> murders %>% ggplot(aes(population/10^6, total, label=abb)) +
+  geom_abline(intercept = log10(r), lty = 2, color = "darkgrey") +
+  geom_point(aes(col=region), size = 3) +
+  geom_text_repel() +
+  scale_x_log10() + 
+  scale_y_log10() +
+  xlab("Populations in millions (log scale)") +
+  ylab("Total number of murders (log scale)") +
+  ggtitle("US Gun Murders is US 2010") + 
+  scale_color_discrete(name = "Region") +
+  theme_economist()
+
+```
+
+---
+
+
+#### Section 2: Introduction to ggplot2   2.2 Customizing Plots   Other Examples
 
 
