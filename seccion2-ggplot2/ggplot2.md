@@ -567,4 +567,168 @@ So now, let's put it all together from scratch.
 
 #### Section 2: Introduction to ggplot2   2.2 Customizing Plots   Other Examples
 
+ Now that we've learned the basics of ggplot
+we can try to make some of the summary plots we have previously described.
+Let's start with the histogram.
+Let's start to make the histogram for the male heights.
+So in a first step, we need to filter the heights to only include the males.
+We do this using the filter function.
+
+
+```R
+> heights %>% filter(sex=="Male)
+```
+Now that we have a data set, the next step is deciding what geometry we need.
+If you guessed geom_histogram you guessed right.
+
+```R
+> geom_histogram()
+```
+
+So the code could look something like this.
+We're going to do it in two steps.
+First, we're going to define a graph object
+p, that has the data piped into the ggplot function
+and defines the aesthetic mapping that tells us that heights is what
+we're going to make a histogram of.
+
+```R
+> p <- heights %>%  
+  filter(heights$sex == "Male") %>% 
+  ggplot(aes(x = height))
+
+> p + geom_histogram()
+
+```
+
+Now when we do this, we notice that we get a warning or a message
+saying that the bin width was not picked, and it was picked for us.
+So what we can do now is add the bin width that we want.
+
+```R
+> p + geom_histogram(banwidth = 1)
+```
+
+Finally, as an example of the flexibility of ggplot,
+we'll change the color just for aesthetic reasons and add a title.
+We do this using the following code.
+
+
+```R
+> p + geom_histogram(bandwidth = 1, fill = "blue", col = "black") +
+  xlab("Male heights in inches") +
+  ggtitle("Histogram")
+```
+
+Now we can create some densities using another geometry.
+The geometry in this case is called 
+
+```R
+geom_density()
+```
+
+We've already defined a plot object p, so we can,
+instead of adding a histogram layer, we add a geom_density layer.
+And we get the following plot.
+
+
+```R
+> p + geom_density()
+```
+
+For a Q-Q plot we use the geom_qq geometry.
+
+```R
+> p + geom_qq()
+```
+
+```R
+> p + heights %>% filter(sex == "Male") %>%
+  ggplot(aes(sample = height))
+> p + geom_qq()
+```
+
+By default, the Q-Q plot is compared to the normal distribution with average
+zero and standard deviation one.
+
+To change this, again, from the help file,
+we learn that we need to use the dparams argument.
+So now what we do is we define an object params
+that will have the mean and standard deviation of our data.
+We use some dplyr functions to do this, and now we
+add the geometry by assigning this new object that we
+created to the dparams argument.
+
+```R
+> params <- heights %>% +
+  filter(sex == "Male") %>% +
+  summarize(mean = mean(height), sd = sd(height))
+
+> p + geom_qq(dparams = params)
+```
+
+We can then add identity lines to see how
+well the normal approximation works.
+
+```R
+> p + geom_qq(dparams = params) +
+  geom_abline()
+```
+
+Another option here is to first scale the data so that we have them
+in standard units and plot it against the standard normal distribution.
+This saves us the step of having to compute
+the mean and standard deviation.
+
+```R
+> heights %>% filter(sex=="Male") %>% +
+  ggplot(aes(sample = scale(height))) +
+  geom_qq() +
+  geom_abline()
+```
+
+One way to do that is to use the grid extra package, which has a function
+called grid.arrange that lets us show different plot
+objects next to each other.
+
+```R
+> p <- heights %>% filter(sex == "Male) %>% ggplot(aes(x = height))
+> p1 <- p + geom_histogram(binwidth = 1, fill = "blue", col = "black")
+> p2 <- p + geom_histogram(binwidth = 2, fill = "blue", col = "black")
+> p3 <- p + geom_histogram(binwidth = 3, fill = "blue", col = "black")
+```
+
+So in this case, we're creating three different histograms.
+And we're saving them to the objects p1, p2, p3.
+Then to show them next to each other we use
+the grid.arrange function like this.
+
+```R
+> library(gridExtra)
+> grid.arrange(p1, p2, p3, ncol = 3)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
