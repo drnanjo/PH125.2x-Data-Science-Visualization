@@ -166,3 +166,70 @@ we can type this.
 
 #### Section 3: Summarizing with dplyr   3.1 Summarizing with dplyr   Group By
 
+A very common operation and data exploration
+is to first split data into groups and then compute summaries for each group.
+For example, we may want to compute the average and standard deviation for men
+and women heights separately.
+The group underscore by function helps us do this.
+Let's look at an example.
+If we take heights and we pipe it into the group
+by function that is using sex to group it by, we see this table.
+
+    > heights %>% group_by(sex)
+    # A tibble: 1,050 x 2
+    # Groups:   sex [2]
+       sex    height
+       <fct>   <dbl>
+     1 Male       75
+     2 Male       70
+     3 Male       68
+     4 Male       74
+     5 Male       61
+     6 Female     65
+     7 Female     66
+     8 Female     62
+     9 Female     66
+    10 Male       67
+    # ... with 1,040 more rows
+
+Although not immediately obvious from its appearance,
+this is now a special data frame called a "group data frame."
+And dplyr functions, in particular summarize,
+will behave differently when acting on this object.
+
+Conceptually, you can think of this table
+as many tables with the same columns but not necessarily the same rows that
+are stacked together into one object.
+
+So note what happens when we summarize the data after grouping it?
+We write this piece of code where we first group by sex,
+and then we summarize asking that we get the mean and the standard deviation.
+The result is a table that has the average and the standard deviation
+for females and males separately.
+
+    > heights %>% group_by(sex) %>% summarize(average = mean(height), standard_deviation = sd(height))
+    # A tibble: 2 x 3
+      sex    average standard_deviation
+      <fct>    <dbl>              <dbl>
+    1 Female    64.9               3.76
+    2 Male      69.3               3.61
+
+For another example, let's compute the median murder rate
+in the four regions of the country.
+We can write this code that looks a lot like the previous one.
+We type murders.
+We group it by region.
+And then we summarize it, asking to get back the median murder rate.
+
+    > murders %>% group_by(region) %>% summarize(median_rate = median(murder_rate))
+    # A tibble: 4 x 2
+      region        median_rate
+      <fct>               <dbl>
+    1 Northeast            1.80
+    2 South                3.40
+    3 North Central        1.97
+    4 West                 1.29
+
+---
+
+#### Section 3: Summarizing with dplyr   3.1 Summarizing with dplyr   Sorting Data Tables
