@@ -324,3 +324,131 @@ during the last 40 to 50 years.
 ---
 
 #### Section 4: Gapminder   4.2 Using the Gapminder Dataset   Time Series Plots
+
+The visualizations we have just seen
+effectively illustrate that data no longer
+supports the Western versus worldview.
+But once we see these plots, new questions emerge.
+For example, which countries are improving more?
+Which ones are improving less?
+Was the improvement constant during the last 50 years,
+or was there more of an acceleration during a specific certain period?
+For a closer look that may help answer these questions,
+we introduce time series plots.
+
+Time series plots have time in the x-axis, and an outcome, or measurement
+of interest, on the y-axis.
+For example, here's a trend plot for the United States fertility rate.
+We can get this plot by simply using the geom points layer.
+
+When we look at this plot, we immediately
+see that the trend is not linear at all.
+Instead, we see a sharp drop during the 60s and 70s to below 2.
+Then, the trend comes back up to 2, and stabilizes there in the 1990s.
+
+When the points are regularly spaced and densely packed as they are here,
+we can create curves by joining points with lines.
+This conveys that these data are from a single country.
+To do this, we use the 
+    
+    geom_line() 
+
+function instead of `geom_point`.
+
+We write the code like this, and now the curve looks like this.
+
+    gapminder %>% filter(country == "United States") %>% ggplot(aes(year, fertility)) + geom_line()
+
+This is particularly helpful when we look at two or more countries.
+Let's look at an example.
+Let's subset the data to include two countries.
+Let's look at one from Europe and one from Asia.
+
+    > countries <- c("South Korea", "Germany")
+    gapminder %>% filter(country == countries) %>% ggplot(aes(year, fertility)) + geom_line()
+
+So we copy the code above--
+here it is-- and we get this plot.
+But note that this is not what we want.
+Rather than a line for each country, this code
+has produced a line that goes through the points for both countries-- they're
+both joined.
+
+This is actually expected, since we have not told ggplot anything
+about wanting two separate lines.
+
+To let ggplot know that there are two curves that need to be made separately,
+we assign each point to a group, one for each country.
+We do this through the mapping.
+We assign country to the group argument.
+The plot now looks like this.
+
+    gapminder %>% filter(country == countries) %>% ggplot(aes(year, fertility, group = country)) + geom_line()
+
+We can see the two lines, one for each country.
+
+However, we don't know which line goes with which country.
+To see this, we can use color for example.
+We can use color to distinguish the two countries.
+
+A useful side effect of using color to assign different colors to each country
+is that ggplot automatically groups the data by the color value.
+So the code is very simple, it looks like this.
+
+    gapminder %>% filter(country == countries) %>% ggplot(aes(year, fertility, col = country)) + geom_line()
+
+
+And once we type this, then we get two lines, each with a color.
+And a legend has been added by default. Note that this plot clearly
+shows how South Korea's fertility rate dropped drastically
+during the 60s and 70s.
+And by 1990, it had a similar fertility rate to Germany.
+
+For time series plots, we actually recommend labeling the curves
+rather than using legends as we did in the previous plot.
+This suggestion actually applies to most plots.
+Labeling is usually preferred over legends.
+However, legends are easier to make and appear
+by default in many of ggplot's functions.
+
+We are going to show an example of how to add labels to a time series plot.
+We demonstrate how we can do this using the life expectancy data.
+We define a data table with the label locations.
+And then we use a second mapping just for the labels.
+The code looks like this.
+
+    > labels <- data.frame(country = countries, x = c(1975, 1965), y = c(60, 72))
+    > gapminder %>% filter(country == countries) %>% 
+        ggplot(aes(year, life_expectancy, col = country)) + 
+        geom_line() + 
+        geom_text(data = labels, aes(x, y, label = country), size = 5) + 
+        theme(legend.position = "none")
+
+
+Notice that we define a data frame with the locations
+of where we want the labels.
+We pick these by eye.
+And then you can see in the geom_text, we
+are using the labels data frame as the data,
+so that those labels are put in those positions.
+Then we have to tell the plot not to add a legend through the theme function.
+And now the plot looks like this.
+
+This is the life expectancy plot.
+And we can see how the plot shows how an improvement in life expectancy
+followed the drops in fertility rates.
+While in 1960, Germans lived more than 15 years more on average
+than South Koreans, by 2010 the gap is completely closed.
+
+Another commonly held notion is that wealth distribution across the world
+has become worse during the last decades.
+When general audiences are asked if poor countries have become poorer
+and rich countries have become richer, the majority answer yes.
+
+By using histograms, smooth densities, and box plots,
+will be able to understand if this is in fact the case.
+
+
+---
+
+#### Section 4: Gapminder   4.2 Using the Gapminder Dataset   Transformations
