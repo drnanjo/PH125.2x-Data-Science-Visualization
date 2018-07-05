@@ -83,3 +83,92 @@ We're going to use data and our code to answer these questions.
 
 #### Section 4: Gapminder   4.1 Introduction to Gapminder   Gapminder Dataset
 
+To learn about world health and economics,
+we will be using the Gapminder data set provided in the DS Labs library.
+This dataset was put together for you, and it
+was created using a number of spreadsheets
+available from the Gapminder Foundation.
+You can access the table using this code.
+
+> library(dslabs)
+> data(gapminder)
+> head(gapminder)
+              country year infant_mortality life_expectancy fertility
+1             Albania 1960           115.40           62.87      6.19
+2             Algeria 1960           148.20           47.50      7.65
+3              Angola 1960           208.00           35.98      7.32
+4 Antigua and Barbuda 1960               NA           62.97      4.43
+5           Argentina 1960            59.87           65.39      3.11
+6             Armenia 1960               NA           66.86      4.55
+  population          gdp continent          region
+1    1636054           NA    Europe Southern Europe
+2   11124892  13828152297    Africa Northern Africa
+3    5270844           NA    Africa   Middle Africa
+4      54681           NA  Americas       Caribbean
+5   20619075 108322326649  Americas   South America
+6    1867396           NA      Asia    Western Asia
+
+
+
+and we can see that the data includes country, year, and several health
+outcomes and economics outcomes.
+
+As done in the New Insights on Poverty video,
+we start by testing our knowledge regarding differences in child
+mortality across different countries.
+To get us started, we're going to take a quiz created
+by Hans Rosling in his video New Insights on Poverty,
+and we're going to start by testing our knowledge regarding differences
+in child mortality across different countries.
+So here's a quiz.
+
+* For each of the pairs of countries here, which country
+do you think had the highest child mortality in 2015?
+
+* And also, which pairs do you think are most similar?
+```
+1. Sri Lanka* or Turkey
+2. Poland* or South Korea
+3. Malaysia or Russia*
+4. Pakistan or Vietman*
+5. Thailand* of South Africa
+```
+
+When answering these questions without data,
+the non-European countries are typically picked
+as having higher mortality rates, Sri Lanka over Turkey,
+South Korea over Poland, and Malaysia over Russia.
+It is also common to assume that countries considered
+to be part of the developing world, Pakistan, Vietnam, Thailand, and South
+Africa, have similarly high mortality rates.
+
+Now let's answer these questions with data.
+For example, for this first comparison, we
+can write this simple dplyr code to see that Turkey has a higher mortality
+rate than Sri Lanka.
+
+    > gapminder %>% 
+    +     filter(year == 2015 & country %in% c("Sri Lanka", "Turkey")) %>%
+    +     select(country, infant_mortality)
+        country infant_mortality
+    1 Sri Lanka              8.4
+    2    Turkey             11.6
+
+We can use the same code to answer each of the five questions,
+and we see that Sri Lanka has a lower mortality rate than Turkey,
+South Korea has a lower mortality rate than Poland,
+Malaysia has a lower mortality rate than Russia,
+and Pakistan is very different from Vietnam,
+and South Africa is very different from Thailand.
+From here, we see that these comparisons, the European countries
+have higher rates.
+We also see that the countries from the developing world
+can have very different rates.
+It turns out that most people do worse than if they were just
+guessing, which implies that we're more than ignorant, we're misinformed.
+
+
+
+---
+
+####  Section 4: Gapminder   4.1 Introduction to Gapminder   Life Expectancy and Fertility Rates
