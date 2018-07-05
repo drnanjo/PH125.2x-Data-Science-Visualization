@@ -83,11 +83,86 @@ and returns a single value.
 For example, we can write code that computes the median, the mean
 and the max, like this.
 
-> heights %>% +
-filter(sex == "Male") %>% +
-summarize(median = median(height), minimum = min(height), maximun = max(height))
+    > heights %>% +
+    filter(sex == "Male") %>% +
+    summarize(median = median(height), minimum = min(height), maximun = max(height))
 
 
 ---
 
 #### Section 3: Summarizing with dplyr   3.1 Summarizing with dplyr   The Dot Placeholder
+In this video, we're going
+to learn how to make dplyr functions return vectors as opposed to data
+frames.
+This can be useful sometimes.
+We're going to use the US murder data as an example.
+Remember our data table includes total murders and population
+size for each state, and we have already used dplyr to add a murder rate column.
+
+    > data(murders)
+    > murders <- murders %>% mutate(murder_rate = total/population * 100000)
+    > summarize(murders, mean(murder_rate))
+
+
+However, note that the US murder rate is not
+the average of the state murder rates.
+If you do that, you get 2.78.
+This is not the US murder rate, which is closer to 3.
+
+This is because in this computation we're
+counting the small states just the same as the large states,
+and when we compute the average US murder rate,
+it needs to take into account bigger states more than smaller states.
+The US murder rate is proportional to the total US murders
+divided by the total US population.
+
+So the correct computation is as follows.
+We can use Summarize, and now we compute the sum of the total murders,
+and we divide by the sum of population, and this gives us the correct US murder
+rate, which is 3.03.
+
+    > us_murder_rate <- murders %>% summarize(rate = sum(total) / sum(population) * 100000)
+    > us_murder_rate
+          rate
+    1 3.034555
+
+Now the US murder rate object defined above represents just one number.
+So suppose we want to use a function that requires just a numeric value,
+we can't use the US murder rate object because it's a data frame.
+
+    > class(us_murder_rate)
+    [1] "data.frame"
+
+Most of dplyr functions, including Summarize, always return data frames.
+So this might be problematic because, again,
+if we want to use the result with a function that requires a numeric value,
+we won't be able to do it.
+Here we show a useful trick to access value
+stored in data that is being piped using the pipe character
+
+The best way to understand what we mean by this is to look at code.
+Note, that if we write this piece of code, we get a numeric 3.03.
+
+    > us_murder_rate %>% .$rate
+    [1] 3.034555
+
+
+This returns the value in the rate column of the US murders rate table
+making it equivalent to typing US murders rate dollar sign rate.
+To understand this line, you just need to think of the dot
+as a placeholder for the data that is being passed through the pipe.
+Because this data object is a data frame,
+we can access it's column using dot dollar sign and then the column name.
+
+To get a number from the original data table with one line of code,
+we can type this.
+
+    > us_murder_rate <- murders %>% summarize(rate = sum(total) / sum(population) * 100000) %>% .$rate
+    > class(us_murder_rate)
+    [1] "numeric"
+
+
+---
+
+#### Section 3: Summarizing with dplyr   3.1 Summarizing with dplyr   Group By
+
