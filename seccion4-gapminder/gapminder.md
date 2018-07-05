@@ -172,3 +172,48 @@ guessing, which implies that we're more than ignorant, we're misinformed.
 ---
 
 ####  Section 4: Gapminder   4.1 Introduction to Gapminder   Life Expectancy and Fertility Rates
+
+ Our misconceptions stem from the preconceived notion
+that the world is divided into two groups, the Western World, composed
+of Western Europe and North America, which
+is characterized by long lifespans and small families versus the developing
+world, Africa, Asia, and Latin America, characterized
+by short lifespans and large families.
+But does the data support this dichotomous view of the world?
+
+The necessary data to answer this question
+is also available in our gapminder table.
+Using our newly-learned data visualization skills,
+we will be able to answer this question.
+The first plot we make to see what data have to say about this worldview
+is a scatterplot of life expectancy versus fertility rates.
+Fertility rates are defined as the average number of children per woman.
+We will start by looking at data from about 50 years
+ago when, perhaps, this worldview was cemented in our minds.
+We just type the simple code and we see this plot.
+
+    ds_theme_set()
+    filter(gapminder, year == 1962) %>% ggplot(aes(fertility, life_expectancy)) + geom_point()
+
+Note that most points do, in fact, fall into two distinct categories, one
+with life expectancies around 70 years and three or less children per family
+and the other with life expectancies lower than 65 years
+and with more than five children per family.
+
+Now, to confirm that indeed these countries are from the regions
+we expect, we can use color to represent continent.
+So we change the code slightly by adding the color argument,
+assigning continent to it
+
+    filter(gapminder, year == 1962) %>% ggplot(aes(fertility, life_expectancy, color = continent)) + geom_point()
+
+Because continent is a character, it will automatically
+assign color to each continent.
+Here's the plot.
+So indeed, in 1962, the West versus developing worldview
+was grounded in some reality, but is this still the case 50 years later?
+To answer to this question, we're going to learn about faceting.
+
+---
+
+#### Section 4: Gapminder   4.2 Using the Gapminder Dataset   Faceting
