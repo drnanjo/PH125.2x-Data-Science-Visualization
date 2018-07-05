@@ -217,3 +217,110 @@ To answer to this question, we're going to learn about faceting.
 ---
 
 #### Section 4: Gapminder   4.2 Using the Gapminder Dataset   Faceting
+
+We could easily applaud the 2012
+data in the same way we did for 1962.
+But for comparison, side by side plots are preferable.
+In ggplot, we can achieve this by faceting variables.
+We stratify the data by some variable and make the same plot for each strata.
+
+Here we are faceting by the year.
+To achieve this, we use a function 
+
+    facet_grid
+
+This is added as a layer which automatically separates the plots.
+The function lets you facet by up to two variables
+using columns to represent one variable and rows to represent the other.
+The function expects the rows and column variables separated by a tilde.
+
+
+We're going to facet by continent and year.
+So continent will be in the rows, and year will be in the columns.
+
+> filter(gapminder, year %in% c(1962, 2012)) %>% ggplot(aes(fertility, life_expectancy, col=continent)) + geom_point() + facet_grid( continent ~ year )
+
+We can see how the data has been stratified.
+We have 1962 on the left, 2012 on the right,
+and the 5 continents in each row.
+
+However, this is just an example and more than what we want,
+which is simply to compare in 1962 and 2012.
+In this case, there's just one variable.
+So what we do is we use the dot to let the facet function
+know that we're not using two variables but just one.
+The code looks like this.
+
+> filter(gapminder, year %in% c(1962, 2012)) %>% ggplot(aes(fertility, life_expectancy, col=continent)) + geom_point() + facet_grid( . ~ year )
+
+We simply type facet_grid dot-- meaning we're not using a variable
+for the rows--
+tilde year which now tells it make two columns--
+1962 and 2012.
+And here is the plot.
+After we split the plot like this, it clearly
+shows that the majority of countries have moved from the developing world
+cluster to the Western world one.
+They went from having large families and short lifespans
+to having smaller families and longer lifespans.
+In 2012, the Western versus developing world view no longer makes sense.
+This is particularly clear when we compare Europe to Asia.
+
+Asia includes several countries that have made great improvements
+in the last 40 to 50 years.
+
+To explore how this transformation happened through the years,
+we can make the plot for several years.
+For example, we can add 1970, 1980, 1990, and 2000 to the plot.
+Now, if we do this, we will not want all the plots on the same row.
+This is the default behavior of 
+
+    facet_grid()
+
+If we do this, the plots will become too thin,
+and we won't be able to see the data.
+
+Instead, we might want to have the plots across different rows and columns.
+For this, we can use the 
+
+    facet_wrap()
+
+function which permits us to do this.
+It automatically wraps the series of plots
+so that most displays has viewable dimensions.
+
+    > years <- c(1962, 1980, 1990, 2000, 2012)
+    > continents <- c("Europe", "Asia")
+    > gapminder %>% filter(year %in% years & continent %in% continents) %>% ggplot(aes(fertility, life_expectancy, col=continent)) + geom_point() + facet_grid( ~ year )
+
+And then at the end, we `facet_wrap` instead of `facet_grid`.
+And now, the plot looks like this.
+Now, we're only showing Asia and Europe, but the function clearly
+shows us how the Asian countries have made great improvements
+throughout the years.
+
+Now, note that the default choice for the range of the axes
+is an important one.
+When not using facet, this range is determined
+by the data shown in the plot.
+When using facet, the range is determined
+by the data shown in **all plots**.
+And therefore, it's kept fixed across the plots.
+This makes comparisons across plots much easier.
+
+For example, in the plot we just saw, the life expectancy has increased,
+and the fertility has decreased across most countries.
+We see this because the cloud of points moves up and to the left.
+This is not the case if we adjust the scales to each year separately.
+
+In this case, we have to pay special attention
+to the range to notice that the plot on the right has larger life expectancy.
+
+Therefore, by keeping the scales the same,
+we were able to quickly see how many of the countries
+outside of the Western world have improved
+during the last 40 to 50 years.
+
+---
+
+#### Section 4: Gapminder   4.2 Using the Gapminder Dataset   Time Series Plots
