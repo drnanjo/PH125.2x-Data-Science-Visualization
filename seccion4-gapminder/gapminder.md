@@ -452,3 +452,191 @@ will be able to understand if this is in fact the case.
 ---
 
 #### Section 4: Gapminder   4.2 Using the Gapminder Dataset   Transformations
+ In this video, we cover transformations.
+Transformations can be very useful to better understand distributions.
+As an example, in this video, we look at income.
+The Gapminder data table includes a column
+with the country's gross domestic product, the GDP.
+GDP measures the market value of goods and services
+produced by a country in a given year.
+
+    > head(gapminder)
+                  country year infant_mortality life_expectancy fertility population          gdp
+    1             Albania 1960           115.40           62.87      6.19    1636054           NA
+    2             Algeria 1960           148.20           47.50      7.65   11124892  13828152297
+    3              Angola 1960           208.00           35.98      7.32    5270844           NA
+    4 Antigua and Barbuda 1960               NA           62.97      4.43      54681           NA
+    5           Argentina 1960            59.87           65.39      3.11   20619075 108322326649
+    6             Armenia 1960               NA           66.86      4.55    1867396           NA
+      continent          region
+    1    Europe Southern Europe
+    2    Africa Northern Africa
+    3    Africa   Middle Africa
+    4  Americas       Caribbean
+    5  Americas   South America
+    6      Asia    Western Asia
+
+The GDP per person is often used as a rough summary of how rich a country is.
+Here we divide this quantity by 365 to obtain the more interpretable measure
+dollars per day.
+
+Using current US dollars as a unit, a person surviving on an income
+of less than $2 a day, for example, is defined
+to be living in absolute poverty.
+So we're going to add this variable to our data table.
+It's the dollars per day variable.
+
+    > gapminder <- gapminder %>% mutate(dollars_per_day = gdp/population/365)
+
+
+
+GDP divided by population divided by 365.
+Before we continue, note that GDP values is in our data table
+are adjusted for inflation and represent current US dollars.
+So these values are meant to be comparable across the years.
+Also note that these are country averages and that within each country,
+there's much variability.
+
+OK, so let's move on to examining distributions.
+Here's a histogram of per day incomes from 1970.
+You can obtain it with a simple code which you've already learned.
+
+    > past_year <- 1970
+    > gapminder %>% filter(year == past_year & !is.na(gdp)) %>% ggplot(aes(dollars_per_day)) + geom_histogram(binwitdth = 1, color = "black")
+
+We see that for the majority of countries,
+averages are below $10 a day.
+However, the majority of the x-axis is dedicated to the 35 countries
+with averages above 10.
+It might be more informative to quickly be
+able to see how many countries make on average about $1 a day,
+extremely poor--
+$2 a day, very poor--
+$4 a day, poor--
+$8 a day, which is about middle--
+$16 a day which is a well-off country--
+$32 is rich, and $64 which is very rich.
+These changes are multiplicative.
+
+And here we introduce **log transformations**.
+Log transformations change multiplicative changes
+into additive ones.
+Using base 2 for, example, means that every time a value doubles,
+the log transformation increases by one.
+So to get the distribution of the log base 2
+transform values, we simply transform the data and use the same code.
+And now we obtain this histogram.
+
+    > gapminder %>% filter(year == past_year & !is.na(gdp)) %>% ggplot(aes(log2(dollars_per_day))) + geom_histogram(binwidth = 1, color = "black")
+
+In this plot, we see something new.
+We see two clear bumps.
+
+Before we continue interpreting the data,
+let's introduce some commonly used statistical language.
+In statistics, these bumps are sometimes referred to as **modes**.
+The mode of a distribution is the value with the highest frequency.
+The mode of a normal distribution is the average.
+But if the mode is a value with the highest frequency, how can
+we have more than one?
+
+When a distribution like the one we just saw
+doesn't monotonically decrease from the mode,
+we call the location where it goes up and down again as **local modes**.
+And we say that the distribution has **multiple modes**.
+
+The histogram we just saw suggests that in 1970, country income distribution
+have two modes.
+One at about $2 per day, one in the log2 scale, and another at about $32
+per day--
+5 in the log2 scale.
+
+This bimodality is consistent with the dichotomous world
+made up of countries with average incomes less than $8 per day,
+3 on the log scale.
+And countries above that we see two modes in the histogram.
+
+Now before we continue interpreting the data,
+we need to make another pause to explain how we choose the base.
+And the histogram we just saw we chose base 2.
+Other common choices are the natural log and base 10.
+In general, we do not recommend using the natural log
+for data exploration in visualization.
+Why is this?
+It's because while we know what 2 to the 2 is--
+2 to the 3--
+2 to do the 4, we can quickly compute that in our mind.
+10 to the 1, 10 to the 2, 10 to the 3-- also very easy to compute.
+It's not easy to compute E to the 2, E to the 3, etcetera.
+So we don't recommend using the natural log for data exploration.
+
+In the dollar per day example, we use base 2 instead of base 10
+because the resulting range is easier to interpret.
+The range of the values being plotted started from about 0.3
+and ended around 50.
+In base 10, this turns to a range that includes very few integers, just 0
+and 1.
+With base 2, our range includes negative 2, negative 1, 0, 1, 2, 3, 4, and 5.
+Note that it is easier to compute 2 to the x and 10 to the x
+when x is an integer.
+So we prefer to have more integers in the transform scale.
+
+Another consequence of a limited range is that choosing the bin width
+is more challenging.
+With log base 2, we know that a bin width of 1
+will translate to bins with range x to 2 to the x.
+
+As an example in which base 10 makes more sense than base 2,
+consider population size.
+Using log base 10 makes more sense here since the range for these data
+goes from 45,000 to about 800 million.
+
+Here's a histogram if we transform the values with the log base 10.
+Looking at the scale knowing that we're in base 10,
+we can quickly determine that country population ranges from about 40,000
+to about a billion.
+
+Now let's talk about log transformations and how we use them in the plots.
+There are two ways we can use long transformation in plots:
+
+* We can log the values before plotting them,
+* or we can use log scales in the axis.
+
+Both approaches are useful and have different strengths.
+
+If we log the data, we can more easily interpret intermediate values
+in the scale.
+For example, if we use a scale that looks
+like this that has been log transformed, we know that x is 1.5.
+If the scales are logged and we have that x in between 1 and 10,
+then we don't know immediately what the x
+is because it's 10 to the 1.5, not an easy thing to compute in our heads.
+However, the advantage of using log scales
+is that we see the original values on the axis.
+So this has an advantage because we see the original values displayed
+in the plot which makes it very easy to quickly see what
+numbers we're actually dealing with.
+For example, when we see $32 a day, instead of 5 log base $2 a day.
+
+Now let's review how we make plots where the scales have been log transformed.
+We already learned this.
+We learned the `scale_x_continuous` function.
+So we want to remake the histograms that we already made
+but now using scales that have been transformed.
+We simply add a layer using the scale underscore
+x underscore continuous function.
+And we no longer transform the data before plotting it.
+So the code would look like this, and the plot would look like this.
+
+    > gapminder %>% filter(year == past_year & !is.na(gdp)) %>% ggplot(aes(dollars_per_day)) + geom_histogram(binwidth = 1, color = "black") + scale_x_continuous(trans = "log2")
+
+Notice that the histogram looks exactly the same.
+The difference is that in the scales in the x-axis,
+instead of seeing the log values, we see the original values in a log scale.
+So we see 1, 8, and 64.
+And we can very quickly interpret what that means in terms of dollars per day.
+
+
+---
+
+#### Section 4: Gapminder   4.2 Using the Gapminder Dataset   Stratify and Boxplot
