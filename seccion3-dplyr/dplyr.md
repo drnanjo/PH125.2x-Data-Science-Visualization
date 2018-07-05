@@ -233,3 +233,118 @@ And then we summarize it, asking to get back the median murder rate.
 ---
 
 #### Section 3: Summarizing with dplyr   3.1 Summarizing with dplyr   Sorting Data Tables
+
+ When examining a data set,
+it is often convenient to sort the table by different columns.
+We know about the order and sort functions.
+But for ordering entire tables, the function, arrange in dplyr,
+is very useful.
+For example, here, we order the states by their population size.
+All we have to do is type murders, and then pipe it to the arrange function.
+And tell it to sort it by population.
+
+
+    > murders %>% arrange(population) %>% head()
+                     state abb        region population total murder_rate
+    1              Wyoming  WY          West     563626     5   0.8871131
+    2 District of Columbia  DC         South     601723    99  16.4527532
+    3              Vermont  VT     Northeast     625741     2   0.3196211
+    4         North Dakota  ND North Central     672591     4   0.5947151
+    5               Alaska  AK          West     710231    19   2.6751860
+    6         South Dakota  SD North Central     814180     8   0.9825837
+
+Note that we get to decide which column to sort by.
+To see the states ordered by murder rate instead of population,
+we write almost the exact same code.
+
+    > murders %>% arrange(murder_rate) %>% head()
+              state abb        region population total murder_rate
+    1       Vermont  VT     Northeast     625741     2   0.3196211
+    2 New Hampshire  NH     Northeast    1316470     5   0.3798036
+    3        Hawaii  HI          West    1360301     7   0.5145920
+    4  North Dakota  ND North Central     672591     4   0.5947151
+    5          Iowa  IA North Central    3046355    21   0.6893484
+    6         Idaho  ID          West    1567582    12   0.7655102
+
+Except now instead of population, we type murder rate.
+And we can see the 6 states with the lowest murder rates:
+
+
+Note that the default behavior is to sort in ascending order.
+In dplyr, the function `desc`
+which stands for descending-- transforms a vector to be in descending order.
+So, if we instead type the following code,
+we get the states ordered by murder rate from highest to lowest.
+
+    > murders %>% arrange(desc(murder_rate)) %>% head()
+                     state abb        region population total murder_rate
+    1 District of Columbia  DC         South     601723    99   16.452753
+    2            Louisiana  LA         South    4533372   351    7.742581
+    3             Missouri  MO North Central    5988927   321    5.359892
+    4             Maryland  MD         South    5773552   293    5.074866
+    5       South Carolina  SC         South    4625364   207    4.475323
+    6             Delaware  DE         South     897934    38    4.231937
+
+We can also do nested sorting.
+Let's say we're ordering by a column, and there's ties.
+We can break the ties with the second column, or a third or a fourth.
+
+In this example, we order by region.
+Then within each region, we order by murder rate.
+
+    > murders %>% arrange(region, murder_rate) %>% head()
+              state abb    region population total murder_rate
+    1       Vermont  VT Northeast     625741     2   0.3196211
+    2 New Hampshire  NH Northeast    1316470     5   0.3798036
+    3         Maine  ME Northeast    1328361    11   0.8280881
+    4  Rhode Island  RI Northeast    1052567    16   1.5200933
+    5 Massachusetts  MA Northeast    6547629   118   1.8021791
+    6      New York  NY Northeast   19378102   517   2.6679599
+
+Another useful function is the top_n function.
+In the code we just seen, we have used the function head
+to avoid having the page fill with the entire data table.
+It shows us the first 6 rows.
+
+Now, if we want to see a larger proportion of the data--
+say the top 10--
+we can use the top_n function.
+
+    > murders %>% top_n(10, murder_rate)
+                      state abb        region population total murder_rate
+    1               Arizona  AZ          West    6392017   232    3.629527
+    2              Delaware  DE         South     897934    38    4.231937
+    3  District of Columbia  DC         South     601723    99   16.452753
+    4               Georgia  GA         South    9920000   376    3.790323
+    5             Louisiana  LA         South    4533372   351    7.742581
+    6              Maryland  MD         South    5773552   293    5.074866
+    7              Michigan  MI North Central    9883640   413    4.178622
+    8           Mississippi  MS         South    2967297   120    4.044085
+    9              Missouri  MO North Central    5988927   321    5.359892
+    10       South Carolina  SC         South    4625364   207    4.475323
+
+However, they are not ordered.
+If we want to order, we have to use the arrange function.
+So here's how we do it.
+We type murders.
+We pipe it into a range, which we then use murder rate to order the data.
+And then we pipe it into top_n.
+
+    > murders %>% arrange(desc(murder_rate)) %>% top_n(10)
+    Selecting by murder_rate
+                      state abb        region population total murder_rate
+    1  District of Columbia  DC         South     601723    99   16.452753
+    2             Louisiana  LA         South    4533372   351    7.742581
+    3              Missouri  MO North Central    5988927   321    5.359892
+    4              Maryland  MD         South    5773552   293    5.074866
+    5        South Carolina  SC         South    4625364   207    4.475323
+    6              Delaware  DE         South     897934    38    4.231937
+    7              Michigan  MI North Central    9883640   413    4.178622
+    8           Mississippi  MS         South    2967297   120    4.044085
+    9               Georgia  GA         South    9920000   376    3.790323
+    10              Arizona  AZ          West    6392017   232    3.629527
+
+---
+
+#### Section 3: Summarizing with dplyr   3.1 Summarizing with dplyr   Assessment: Summarizing with dplyr
+
