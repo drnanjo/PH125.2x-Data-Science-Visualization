@@ -640,3 +640,26 @@ And we can very quickly interpret what that means in terms of dollars per day.
 ---
 
 #### Section 4: Gapminder   4.2 Using the Gapminder Dataset   Stratify and Boxplot
+ 
+ The histogram showed us that the income distribution
+values show a dichotomy.
+However, the histogram does not show us if the two groups of countries
+are west versus the developing world.
+To see distributions by geographical region,
+we first stratify the data into regions, and then examine
+the distribution for each.
+Now, because a number of regions is large in this case,
+it's 22, as we can see, by just typing this command in r.
+
+    > length(levels(gapminder$region))
+    [1] 22
+
+Looking at histograms or smooth densities for each will not be useful.
+Instead, we can stack box plots next to each other.
+To do this, we simply write this code.
+We've learned how to use geom_boxplot before so we write this.
+
+    p <- gapminder %>% filter(year == past_year & !is.na(gdp)) %>% ggplot(aes(region, dollars_per_day)) 
+    p + geom_boxplot()
+
+When we do this, we get this plot.
