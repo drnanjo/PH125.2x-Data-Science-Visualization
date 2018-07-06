@@ -663,3 +663,75 @@ We've learned how to use geom_boxplot before so we write this.
     p + geom_boxplot()
 
 When we do this, we get this plot.
+
+Now, note that we can't read the region names because the default ggplot
+behavior is to write the labels horizontally
+and here we run out of room.
+We can easily fix this by rotating the labels.
+Consulting the documentation, we find that we
+can rotate the names by changing the theme through element underscore text.
+The h just equals 1 argument justifies this text
+so that it's next to the axis.
+So now what we do is we add to our graph,
+using layers, the following line.
+
+    p + geom_boxplot() + theme(axis.text.x = element_text(angle = 90, hjust = 1))
+
+We can already see that there is indeed a west versus the rest dichotomy.
+If you look closely at the box plots that are high,
+we see that they're North America, northern Europe, Australia,
+New Zealand, and Western Europe.
+
+There are a few more adjustments we can make
+to this plot to help uncover this reality to help relay this message.
+First, it helps to order the regions in some other order that
+is not alphabetical.
+Ordering alphabetically is completely arbitrary.
+
+The function that's going to help us achieve this is the reorder function.
+
+    reorder()
+
+This function lets us change the order of the levels of a factor variable
+based on a summary computed on a numeric vector.
+
+
+Before we continue with our example, let's
+understand how the reorder function works using a simpler one.
+Let's define a factor.
+Based on the vector with 5 entries, Asia, Asia, west, west, west.
+If we turn this vector into factor, the levels of this factor
+are ordered alphabetically.
+This is the default in r.
+
+    > fac <- factor(c("Asia", "Asia", "West", "West", "West"))
+    > levels(fac)
+    [1] "Asia" "West"
+
+So Asia is the first level.
+West is the second level.
+But suppose that each of these elements of the original vector
+are associated with a value.
+Here we're just defining one arbitrarily.
+
+    value <- c(10,11,12,6,4)
+
+Lets suppose that we want to order the levels based
+on the mean value of these numbers.
+In this case, the west has a lower mean.
+It's the mean of 12, 6, 4.
+Compared to the mean of Asia, which is the mean of 10 and 11.
+So if we use a function the order like this-- reorder fac--
+
+    > fac <- reorder(fac, value, FUN = mean)
+    > levels(fac)
+    [1] "West" "Asia"
+
+that's our factor.
+Value-- those are five values.
+And then using the function mean to summarize the values,
+we can see that the new factor that's created has levels ordered differently.
+Now west is the first one.
+Why?
+Because it has a smaller mean value of the value vector.
+
