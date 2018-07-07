@@ -735,3 +735,27 @@ Now west is the first one.
 Why?
 Because it has a smaller mean value of the value vector.
 
+Let's get back to our example.
+In our example, we have regions.
+These are the different parts of a continent.
+We also have continents.
+And then we have divided the world into West versus the rest.
+So we have three different ways of dividing the data.
+The first thing we're going to do to improve our plot,
+is to simply reorder the regions by their median income level.
+To achieve this, we write the same code as
+before but we add to mutate that changes region to a new factor
+where the levels are reordered.
+In this line here.
+If we do this, we get the following plot.
+
+    p <- gapminder %>% filter(year == past_year & !is.na(gdp)) %>% mutate(region = reorder(region, dollars_per_day, FUN = median)) %>% ggplot(aes(region, dollars_per_day, fill = continent)) + geom_boxplot() + theme(axis.text.x = element_text(angle = , hjust = )) + xlab("")
+
+Now we can see that the box plots are ordered by their medium value.
+And we very quickly see that there's four box
+plots that stand out at the end.
+The four highest ones.
+These are Western Europe, Australia and New Zealand, northern Europe,
+and North America.
+
+
