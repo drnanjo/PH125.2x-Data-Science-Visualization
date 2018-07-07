@@ -758,4 +758,53 @@ The four highest ones.
 These are Western Europe, Australia and New Zealand, northern Europe,
 and North America.
 
+This is what we define as the West.
+
+Now there's another change we made to the plot to help convey this message,
+and that's that we use color to show another variable.
+We use color to show continent.
+Remember, regions are parts of continents.
+To add color to define the different continents,
+we use the fill argument in the aesthetic mappings of ggplot.
+We simply say fill equals continent.
+And now each continent gets its color.
+
+Its own color.
+Now, we can see what this does is it helps
+us see that, for example, the blue box blots are towards the right
+because these are the European countries.
+We also see that the red countries, the red box blots, are to the left.
+These are the countries in the African continent.
+The last change we can make to this plot to help
+us see the data little bit better, is to change the scale through the log scale.
+
+
+    p + scale_y_continuous(trans = "log2")
+
+
+We want to change it to log2 scale in this case,
+so we add the layer scale underscore y underscore continuous,
+and we use the log2 transformation.
+And now what this does, is it helps us see
+the differences between the countries with the lower income.
+For example, we see a difference now between the African continent, which
+is in red, and Asia, which is in green.
+
+
+The last change we can make to this plot to make
+it tell the story a little better to give us even more information,
+is to show the data.
+In many cases, we don't show the data, the actual individual points,
+because it adds too much clutter to the plot and it obfuscates the message.
+But in this particular example, we don't have that many points.
+
+
+    p + scale_y_continuous(trans = "log2") + geom_point(show.legend = FALSE) 
+
+So we can add a layer of points by simply adding the geom point layer.
+It's very simple.
+We just add that layer and now we get this plot.
+And we can see the individual points.
+You can decide if you show this or not.
+But now we can see exactly where every single country lies.
 
