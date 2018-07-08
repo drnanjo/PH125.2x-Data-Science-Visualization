@@ -808,3 +808,161 @@ And we can see the individual points.
 You can decide if you show this or not.
 But now we can see exactly where every single country lies.
 
+---
+
+
+#### Section 4: Gapminder   4.2 Using the Gapminder Dataset   Comparing Distributions
+
+The exploratory data analysis we have conducted
+has revealed two characteristics about average income distributions in 1970.
+
+Using a histogram, we found a bimodal distribution
+with the most relating to poor and rich countries.
+Then by stratifying by region and examining box plots,
+we found that the rich countries were mostly in Europe and Northern America,
+along with Australia, New Zealand, and then the poor countries were mostly
+in the rest of the world.
+
+So we are going to define a vector that defines the regions in the West.
+They're just simply defining a vector like this.
+
+west <- c("Western Europe", "Northern Europe", "Southern Europe", "Northern America", "Australia and New Zealand")
+
+
+Now we want to focus on comparing the differences in distribution
+across time.
+We start by confirming that the bi-modality observed in 1970
+is explained by a west versus developing world economy.
+We do this by creating a histogram for the groups previously defined.
+
+    p <- gapminder %>% filter(year == past_year & !is.na(gdp)) %>% mutate(group = ifelse(region%in%west, "West", "Developing")) %>% ggplot(aes(dollars_per_day)) + geom_histogram(binwidth = 1, color = "black") + scale_x_continuous(trans = "log2") + facet_grid(. ~ group)
+
+Note that we create the two groups with an if else inside a mutate.
+And that if we then use facet grid to make histograms for each group using
+this code, we see this histogram.
+And we immediately see that the countries in the West
+have higher incomes.
+The histogram is shifted to the right.
+Countries in the developing world are shifted towards the left.
+
+Now we're ready to see if the separation is worse today
+than it was 40 years ago.
+We do this by now faceting by both region and year.
+So it's the same code, but now we're looking at two years, 1970 and 2010.
+And we end the code with a facet grid by year and group.
+
+    past_year <- 1970
+    present_year <- 2010
+    p <- gapminder %>% filter(year %in% c(past_year, present_year) & !is.na(gdp)) %>% mutate(group = ifelse(region%in%west, "West", "Developing")) %>% ggplot(aes(dollars_per_day)) + geom_histogram(binwidth = 1, color = "black") + scale_x_continuous(trans = "log2") + facet_grid(year ~ group)
+
+Now we can see the histogram again for the four different groups.
+When we look at this figure, we can see that the developing world has shifted
+to the right more than the West.
+Meaning that it has gotten closer.
+The income distribution of the developing countries
+has gotten closer to those from the west.
+
+Before we interpret the findings of this plot further.
+We note that there are more countries represented in the 2010 histograms
+than in the 1970s ones.
+The total accounts are larger.
+
+One reason for this is that several countries were founded after 1970.
+For example, the Soviet Union turned into several countries,
+including Russia and Ukraine there in the '90s.
+Another reason is that data is available for more countries in 2010
+compared to 1970.
+
+So we're going to remake the plots, but using only countries
+with data available for both years.
+We're going to use this very simple code.
+
+country_list_1 <- gapminder %>% filter(year == past_year & !is.na(dollars_per_day)) %>% .$country
+country_list_2 <- gapminder %>% filter(year == present_year & !is.na(dollars_per_day)) %>% .$country
+country_list <- intersect(country_list_1, country_list_2)
+
+
+
+We're going to define a vector with a list for 2010,
+a vector with a list for 1970.
+Here notice we use the dot that we explained earlier,
+to get this character vector out of this the deplyer command.
+And then we're going to take the intersection using
+the intersect function.
+There's actually a better way of doing this using the tidyverse tools,
+but we haven't learned those yet.
+So we use this simple piece of code.
+
+So now there's 108 countries in this list.
+It accounts for 86% of the total population.
+So this subset should be representative of the entire world.
+
+Let's make the plot again, but this time using
+only the subset of countries that are present for which
+data is present in 1970 and 2010.
+We're going to use the country in country list argument
+to do this in a filter function.
+
+gapminder %>% filter(year %in% c(past_year, present_year) & country %in% country_list) %>% mutate(group = ifelse(region%in%west, "West", "Developing")) %>% ggplot(aes(dollars_per_day)) + geom_histogram(binwidth = 1, color = "black") + scale_x_continuous(trans = "log2") + facet_grid(year ~ group)
+
+Now we get this plot.
+We now see that while the rich countries have
+become a bit richer percentage wise, the poorer countries
+appear to have improved more.
+The histogram has shifted more to the right than for the rich countries.
+In particular, we see that the proportion
+of developing countries earning more than $16 a day increases substantially.
+
+To see which specific regions improve the most,
+we can remake the box plots that we made earlier, but now adding 2010.
+Here it is.
+We use the same code.
+
+p <- gapminder %>% filter(year %in% c(past_year, present_year) & country %in% country_list) %>% mutate(region = reorder(region, dollars_per_day, FUN = median)) %>% ggplot() + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + xlab("") + scale_y_continuous(trans = "log2")
+
+p + geom_boxplot(aes(region, dollars_per_day, fill = continent)) + facet_grid(year ~ .)
+
+We use facet grid to divide into 2010 and 1970.
+And we can see which countries have gone up more.
+Now this box plots, it's a little bit hard to compare,
+because we're trying to compare box plots that are on top of each other.
+It's helpful to put them next to each other.
+So we're going to learn to **ease the comparisons**.
+
+To do this we're going to pause to introduce another powerful ggplot
+feature.
+Because we want to compare each region before and after,
+it would be convenient to have the 1970 box plot next to the 2010 box plot.
+In general, comparisons are easier when data are plotted next to each other.
+So instead of faceting, we keep the data from each year together.
+But ask ggplot plot to color or fill the box block depending on the year.
+ggplot automatically separates them and puts the two box plots
+next to each other.
+This is very convenient.
+Because year is a number, we turn it into a factor
+so that each is a category.
+This is because ggplot automatically assigns a color
+to each level of a factor if we assign that factor to the color argument.
+
+p + geom_boxplot(aes(region, dollars_per_day, fill = factor(year)))
+
+So if we type this command now, we add fill equals factor year,
+we get this plot.
+And we can see which countries have improved the most.
+Look at Eastern Asia, for example, how it went from way down around 8
+all the way up almost to 64.
+
+And finally we point out that if what we are most interested in
+is in comparing before and after values, it
+might make more sense to plot the ratios, or differences in the log
+scale.
+We're still not ready to learn the code that achieves this,
+but here's what the plot would look like.
+This is actually showing a box plot of the log ratios from 2010
+compared to 1970 for each country.
+And we can see again, eastern Asia has the big if improvement.
+
+
+---
+
+#### Section 4: Gapminder   4.2 Using the Gapminder Dataset   Density Plots
