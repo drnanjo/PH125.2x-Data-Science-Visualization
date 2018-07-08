@@ -269,3 +269,16 @@ patterns African countries between 1970 and 2010.
 * As in the previous exercise, transform the x axis to be in the log (base 2) scale.
 * As in the previous exercise, add a layer to display country names instead of points.
 * Use facet_grid to show different plots for 1970 and 2010."                          
+
+library(dplyr)
+library(ggplot2)
+library(dslabs)
+data(gapminder)
+
+gapminder <- gapminder %>% 
+              mutate(dollars_per_day = gdp/population/365) %>% 
+              filter(continent == "Africa" & 
+                      year %in% c("1970","2010") & 
+                      !is.na(dollars_per_day)) %>% 
+              ggplot(aes(dollars_per_day, infant_mortality, color = region)) +
+              scale_x_continuous(trans = "log2")
