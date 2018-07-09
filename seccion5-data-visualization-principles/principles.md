@@ -395,3 +395,47 @@ and the square root transformation, useful for count data.
 ---
 
 #### Section 5: Data Visualization Principles   5.2 Data Visualization Principles, Part 2   Ease Comparisons: Compared Visual Cues Should Be Adjacent
+
+In this video we introduce yet another principle.
+It helps us ease comparison.
+And the principle is that visual cues to be compared should be accurate.
+When comparing income data between 1970 and 2010, across regions,
+we made a figure similar to this one.
+A difference is that here, we look at continents, instead of regions.
+But this is not relevant to the point we're trying to make.
+Note that for each continent, we want to compare
+the distribution from 1970 to 2010.
+
+The default in ggplot is to order alphabetically.
+So the labels with 1970 come before the labels
+with 2010, making that comparison challenging.
+Know how much easier it is to make the comparison when the box blocks that we
+want to compare are next to each other.
+
+Here, we have reordered them to do just that.
+The comparison becomes even easier if we use color to distinguish 1970 to 2010.
+Using color is another way to ease comparisons.
+When picking colors, keep in mind that about 10% of the population
+is color blind.
+
+Unfortunately, the default colors used in ggplot
+are not optimal for this group.
+However, ggplot does it make it easy to change
+the color palette used in the plots.
+
+Here's an example of how we can use a color
+blind friendly palette using ggplot.
+
+    color_blind_friendly_colors <- c("#999999","#E69F00","#5EB4E9","#009E73","#F0E442","#0072B2","#D55E00","#CC79A7")
+    
+    p1 <- data.frame(x=1:8, y=1:8, col = as.character(1:8)) %>% ggplot(aes(x,y,color=col)) + geom_point(size=5)
+    
+    p1 + scale_color_manual(values = color_blind_friendly_colors)
+
+
+You can see that by adding some layers, and picking the right colors,
+we can, in fact, make the use of color blind friendly colors.
+
+---
+
+#### Section 5: Data Visualization Principles   5.2 Data Visualization Principles, Part 2   Assessment: Data Visualization Principles, Part 2
