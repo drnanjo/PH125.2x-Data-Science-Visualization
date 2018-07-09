@@ -242,3 +242,73 @@ make much better graphs.
 ---
 
 #### Section 5: Data Visualization Principles   5.1 Data Visualization Principles, Part 1   Assessment: Data Visualization Principles, Part 1
+
+In this video, we describe yet another principal,
+show the data.
+We have focused on displaying single quantities across categories.
+We now shift our attention to this plane data with a focus on comparing groups.
+To motivate this principle, we go back to our official example
+describing heights to an extraterrestrial, ET.
+This time, let's assume ET is interested in the difference
+in heights between males and females.
+
+A commonly seen plot used for comparison between groups,
+popularized by software such as Microsoft Excel,
+shows the average and the standard error.
+Now keep in mind, standard errors, which we define later,
+are not the same as standard deviations.
+
+Here's what the plot looks like.
+The average of each group is represented by the top of each bar,
+and the antenna that we see that expands out
+is the average plus two standard errors.
+If all ET receives is this plot, he will have
+little information on what to expect if he meets
+a group of humans, males and females.
+Note that the bars go to 0.
+Does this mean there are tiny humans measuring less than one foot?
+Are all males taller than the tallest female?
+Is there a range of heights?
+ET can't answer these questions since we have provided almost no information
+on the height distribution.
+
+This brings us back to our principle, show the data.
+The following simple ggplot code already generates a more informative plot
+than the bar plot by simply showing all the points.
+Just this little line of code shows you the points, the heights for females
+and the height for males.
+However, this plot has limitations as well.
+Since we can't really see all the 216 and 708 points
+plotted for females and males, respectively.
+And many points are plotted above each other
+so we don't know how many there are.
+As we have described, visualizing the distribution is much more informative.
+But before doing this, we point out two ways
+we can improve a plot showing all the points.
+
+The first is to add **jitter**.
+Jitter is adding a small random shift to each point.
+In this case, adding horizontal jitter does not
+alter the interpretation since the height of the points doesn't change.
+But we minimize the number of points that fall on top of each other
+and, therefore, get a better sense of how many points there are
+and how the data is distributed.
+
+A second improvement comes from using **alpha blending**,
+making the point somewhat transparent.
+Without alpha blending, the more points fall
+on top of each other, the darker the plot gets
+in that region, which also helps us get a sense of how
+the points are distributed.
+Here's the same plot with jitter and alpha blending.
+It just requires us to change a couple of arguments,
+and immediately we get a much better sense of what
+the distribution of the data is.
+Now since there are so many points, it is
+more effective to show distribution rather than show individual points.
+In the next video, we'll show distributions,
+and we'll learn some principles of how to best compare these distributions.
+
+
+---
+#### Section 5: Data Visualization Principles   5.2 Data Visualization Principles, Part 2   Ease Comparisons: Use Common Axes
