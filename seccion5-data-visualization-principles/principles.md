@@ -362,3 +362,36 @@ but not very useful when wanting to describe distributions.
 ---
 
 #### Section 5: Data Visualization Principles   5.2 Data Visualization Principles, Part 2   Consider Transformations
+
+Another important principle
+is to consider transformations.
+We have motivated the use of the log transformation
+in cases where the changes are multiplicative.
+Population size was an example in which we found a log transformation
+to yield a more informative plot.
+
+The combination of incorrectly using bar plots,
+when a log transformation is merited, can be particularly distorting.
+As an example, consider this bar plot showing the average population sizes
+for each continent in 2015.
+
+From this plot, one would conclude that countries in Asia
+are much more populous than other continents.
+Following the show-the-data principle, we quickly
+notice that this is due to two very large countries, which
+we assume are India and China.
+You can see those two points way up there.
+Those are those two countries.
+
+Here, using a log transformation provides a much more informative plot.
+We compare the original bar plot to a box plot
+using the log-scale transformation for the y-axis.
+Note how much more informative that box plot is over the bar plot.
+In fact, we see that Africa has a higher median population size than Asia.
+Other transformations you should consider are the logistic
+transformation-- useful to better see full changes in odds--
+and the square root transformation, useful for count data.
+
+---
+
+#### Section 5: Data Visualization Principles   5.2 Data Visualization Principles, Part 2   Ease Comparisons: Compared Visual Cues Should Be Adjacent
