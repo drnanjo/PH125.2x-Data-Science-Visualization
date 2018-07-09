@@ -57,3 +57,74 @@ a finding to a general audience.
 ---
 
 #### Section 5: Data Visualization Principles   5.1 Data Visualization Principles, Part 1   Encoding Data Using Visual Cues
+
+We start by describing some principles for encoding data.
+There are several approaches to our disposal,
+including 
+
+* position, 
+* aligned lengths, 
+* angles, 
+* area, 
+* brightness,
+* and color hue.
+
+In our first example, to illustrate how some of these strategies compare,
+let's suppose we want to report the results from two
+hypothetical polls, asking what browser you use,
+what's your browser preference.
+And the polls were taken in 2000, and then in 2015.
+Here, for each year, we are simply comparing
+four quantities, four percentages.
+
+A widely used graphical representation of percentages, popularized
+by Microsoft Excel, is the pie chart.
+Here's a pie chart for our data.
+There's two pie charts, one for 2000, one for 2015.
+Here, we're representing quantities with both areas and angles,
+since both the angle and area of each pie slice
+is proportional to the quantity it represents.
+This turns out to be a suboptimal choice,
+since, as demonstrated by perception studies,
+humans are not good at precisely quantifying angles,
+and are even worse when only area is available.
+This makes the donut chart, which only uses area, even worse
+than the pie chart.
+To see how hard it is to quantify angles and area,
+note that the rankings and all the percentages in the plots
+that we just saw changed from 2000 to 2015.
+Can you determine the actual percentages and rank the browser's popularity?
+Can you see how the percentages changed from 2000 to 2015?
+It's not easy to tell from the plot.
+
+In this case, simply showing the numbers is not only clear,
+but it would save us on print costs, if making a paper version of our results.
+If we write out the percentages, we quickly
+see which browser is more popular, and how they changed from 2000 to 2015.
+If we insist on a plot, the preferred way to plot these quantities
+is to use length and positions, since humans are
+much better at judging linear measures.
+The bar plot uses this approach by using bars of length proportional
+to the quantity of interest.
+By adding a horizontal line at strategically chosen values,
+in this case at every multiple of 10, we ease the quantifying
+through the position of the top of the bars.
+Compare these two plots.
+
+Notice how much easier it is to see the differences in the bar plot.
+In fact, we can now determine the actual percentages
+by following a horizontal line to the y-axis.
+If for some reason you need to make a pie chart,
+do include the percentages as numbers to avoid having
+to infer them from the angles or area.
+
+In summary, position and length are the preferred way
+to display quantities over angles, which are preferred over area.
+Brightness and color are even harder to quantify than angles and area.
+But, as we will see later, they are sometimes
+useful when more than two dimensions are being displayed.
+
+
+---
+
+#### Section 5: Data Visualization Principles   5.1 Data Visualization Principles, Part 1   Know When to Include Zero
