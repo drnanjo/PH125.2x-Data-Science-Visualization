@@ -312,3 +312,53 @@ and we'll learn some principles of how to best compare these distributions.
 
 ---
 #### Section 5: Data Visualization Principles   5.2 Data Visualization Principles, Part 2   Ease Comparisons: Use Common Axes
+
+Earlier, we saw this plot used
+to compare male and female heights.
+We criticized it for not showing all the data.
+Now in this case, showing all the data is not
+as effective as showing distributions.
+We can add the points, but we want to show the distributions.
+So let's start by creating histograms for each group.
+They look like this.
+
+However, from this plot it's not immediately obvious
+that males are, on average, taller than females.
+We have to look carefully to notice that the x-axis has a higher
+range of values in the male histogram.
+This brings us to another important principle,
+and it's to keep the axes the same when comparing data across plots.
+Know how the comparison becomes easier when we keep the axes the same.
+Now we do see that the male histogram is shifted to the right,
+compared to the female histogram.
+
+Now, there's another principle that we need
+to follow here to make it even easier to compare,
+and it's to **align plots vertical to see horizontal changes**,
+and **horizontally to see vertical changes**.
+
+In these histograms, the visual cue related to decrease
+or increasing height, are shifts to the left, or right, respectively.
+Horizontal change, aligning in the plots vertically,
+helps us see the change when the axes are fixed.
+Look at how much easier it is to see it now.
+This one clearly shows that the male heights are shifted to the right.
+If instead of histograms, we want the more compact summary provided
+by box plots, then we align horizontally,
+since by default box plots move up and down with changes in height,
+vertically.
+
+Here are the two box blocks plotted next to each other, horizontally
+next to each other.
+We can appreciate the vertical changes.
+In this case, we also add all the data, all the points,
+using jitter and alpha blending.
+Now contrast and compare these three plots, based on exactly the same data.
+Note how much more we learn from the two plots on the right.
+Bar plots are useful for showing one number,
+but not very useful when wanting to describe distributions.
+
+
+---
+
+#### Section 5: Data Visualization Principles   5.2 Data Visualization Principles, Part 2   Consider Transformations
