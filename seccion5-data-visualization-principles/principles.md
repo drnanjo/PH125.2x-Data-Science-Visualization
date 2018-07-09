@@ -128,3 +128,77 @@ useful when more than two dimensions are being displayed.
 ---
 
 #### Section 5: Data Visualization Principles   5.1 Data Visualization Principles, Part 1   Know When to Include Zero
+
+When using bar plots, it is dishonest
+not to start the bars at 0.
+This is because by using a bar plot, we are
+implying the length is proportional to the quantities being displayed.
+By avoiding 0, relatively small differences
+can be made to look much bigger than they actually are.
+
+This approach is often used by politicians or media organizations
+trying to exaggerate the difference.
+Here is an illustrative example.
+This is a bar plot made by Fox News showing southwest border
+apprehensions in 2011, 2012, and 2013.
+Look how much bigger the 2013 bar looks compared to the 2011.
+From this plot, it appears that apprehensions have almost
+tripled, when in fact, if you look at the numbers.
+They have only increased by about 16%.
+Starting the graph at 0 illustrates this clearly.
+This is what it looks like if the plot includes 0.
+
+Here's another example, again from Fox News it's showing us
+what would happen if Bush tax cuts expires for the top tax
+rate it's comparing January 1, 2013, to the time in which this was broadcast.
+We look at the bar plots, it looks like the January 1, 2013
+is about 5 times bigger than the now bar plot.
+Here's what it looks like with the appropriate plot, a much different
+story.
+
+When using position rather than length, then it's not necessary to include 0.
+This is particularly the case when we want
+to compare differences between groups relative to the variability seen
+within the groups.
+Here's an illustrative example showing country average life expectancies,
+stratified into continents, in 2012.
+In the plot on the left, which includes 0, the space between 0 and 43
+adds no information, and makes it harder to appreciate
+the between and within variability.
+For this reason, on the plot on the right,
+we restrict the range to include the points.
+
+---
+
+#### Section 5: Data Visualization Principles   5.1 Data Visualization Principles, Part 1   Do Not Distort Quantities
+
+Our next principle is do not distort quantities.
+Here's an example.
+During President Barack Obama's 2011 State Of The Union address,
+the following chart was used to compare the US GDP
+to the GDP of four competing nations.
+Note that judging by the area of the circles,
+the US appears to have an economy over 5 times larger than China,
+and over 30 times larger than France.
+
+However, when looking at the actual numbers,
+one sees that this is not the case.
+The actual ratios are 2.6, and 5.8 times bigger than China and France
+respectively.
+
+The reason for this distortion is that the radius, rather than the area,
+was made to be proportional to the quantity, which
+implies that the proportions between the areas is squared.
+So 2.6 turns into 6.5, and 5.8, turns into 34.1.
+Here's a comparison of the circles we get
+if we make the values proportional to the radius, that's on the left, and so
+the area, that's on the right.
+
+Not surprisingly, ggplot defaults to using area rather than the radius.
+Of course, in this case, we really should not be using area at all,
+since we can use position and length.
+Here's the bar plot comparing the GDPs.
+
+---
+
+#### Section 5: Data Visualization Principles   5.1 Data Visualization Principles, Part 1   Order by a Meaningful Value
