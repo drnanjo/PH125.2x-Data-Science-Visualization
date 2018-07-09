@@ -202,3 +202,43 @@ Here's the bar plot comparing the GDPs.
 ---
 
 #### Section 5: Data Visualization Principles   5.1 Data Visualization Principles, Part 1   Order by a Meaningful Value
+
+Our next principle is order by a meaningful value.
+When one of the axes is used to show categories, as done bar plots,
+the default ggplot behavior is to order the categories alphabetically
+when they are defined by character strings.
+
+If they are defined by factors, they are ordered by the factor levels.
+But remember, factor levels default to ordering by alphabetical order.
+We rarely want to use alphabetical order.
+It's arbitrary.
+Instead, we should order by a meaningful quantity.
+
+In all the cases discussed, the bar plots
+were ordered by the values being displayed.
+The exception was the graph showing bar plots comparing browsers.
+In this case, we kept the order the same across the bar plots
+to ease the comparison.
+Instead, we ordered by the average value of 2000 and 2015.
+We previously learned how to use the reorder function, which
+helps achieve this goal.
+
+To appreciate how the right order to help convey a message,
+suppose we want to create a plot to compare the murder rates across states.
+We're particularly interested in the most dangerous and the safest states.
+Note the difference when we order alphabetically, the default,
+versus when we order by the actual rate.
+
+The information we want is much easier to extract from the plot on the right.
+Note that the reorder function lets us reorder groups as well.
+In an earlier video, we saw an example related to income distribution
+across regions.
+Here are those two plots again.
+In the first one, we simply order alphabetically.
+In the second one, we order by the median value of each group.
+So, we've seen a few examples of how ordering by meaningful values
+make much better graphs.
+
+---
+
+#### Section 5: Data Visualization Principles   5.1 Data Visualization Principles, Part 1   Assessment: Data Visualization Principles, Part 1
