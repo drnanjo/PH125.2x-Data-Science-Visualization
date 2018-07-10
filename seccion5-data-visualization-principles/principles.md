@@ -439,3 +439,52 @@ we can, in fact, make the use of color blind friendly colors.
 ---
 
 #### Section 5: Data Visualization Principles   5.2 Data Visualization Principles, Part 2   Assessment: Data Visualization Principles, Part 2
+
+
+---
+
+#### Section 5: Data Visualization Principles   5.3 Data Visualization Principles, Part 3   Slope Charts
+
+ In every single instance
+in which we have examined the relationship between two variables,
+total murders versus population size, life expectancy versus fertility rates,
+and child mortality versus income, we have used scatterplots.
+This is the plot we generally recommend.
+One exception where another type of plot may be more informative
+is when you are comparing variables of the same type
+but at different time points and for a relatively small number of comparison.
+For example, comparing life expectancy between 2010 and 2015.
+
+In this case, we might consider a slope chart.
+There's no geometry for slope charts in ggplot2,
+but we can construct one using geom_lines.
+We need to do some tinkering to add labels and some other changes.
+The code looks something like this.
+This piece of code produces the following slope chart.
+
+An advantage of the slope chart is that it
+permits us to quickly get an idea of changes
+based on the slope of the lines.
+Note, that we're using angle as a visual cue,
+but we also have position to determine the exact values.
+Comparing the improvement is a bit harder when we use the scatterplot.
+Note that in the scatterplot, we have followed
+the principle use common axes since we are comparing values before and after.
+Now, note that when we have many points, the slope charge
+stops being useful because it becomes too cluttered, and in this case,
+we would use a scatterplot.
+
+Finally, we're going to describe the **Bland-Altman plot**.
+Since what we're interested in is in differences,
+it makes sense to dedicate one of our axes to differences.
+The Bland-Altman plot, also known as the **Two Key Mean Different plot**, and also
+the **MA plot**, shows the difference versus the average.
+Here's an example.
+Here we quickly see which countries have improved the most
+as it's represented in the y-axis.
+We also get an idea of the overall value from the x-axis.
+
+
+---
+
+####  Section 5: Data Visualization Principles   5.3 Data Visualization Principles, Part 3   Encoding a Third Variable
