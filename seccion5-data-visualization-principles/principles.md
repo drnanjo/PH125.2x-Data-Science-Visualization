@@ -653,4 +653,41 @@ but now we can actually see what the values are.
 
 --- 
 
-####
+#### Section 5: Data Visualization Principles   5.3 Data Visualization Principles, Part 3   Avoid Pseudo and Gratuitous 3D Plots
+
+Here we describe an important data visualization principle.
+Avoid pseudo three dimensional plots.
+The figure we show here was taken from the scientific literature.
+It shows three variables, dose, drug type, and survival.
+Although when you look at a plot, you're almost always
+looking at a screen or a book page, which
+are both flat and two dimensional, this plot tries to imitate three-dimension
+and assigns a dimension to each variable.
+
+Humans are not good at seeing in three dimensions.
+Think about how hard it is to parallel park.
+And our limitation is even worse when it's pseudo three-dimensional,
+as it is when you put it on a page or a web page.
+To see this, try to determine the value of the survival variable in the plot.
+Can you tell when the purple ribbon intersects the red one?
+
+This is an example in which it's easy to use color
+to represent the categorical variable.
+We can make the plot like this.
+This plot demonstrate that using color is more than
+enough to distinguish the three lines.
+Pseudo 3D is somewhat used completely gratuitously.
+Plots are made to look 3D, even when the third dimension does not
+represent any quantity.
+
+This only adds confusion and makes it harder to relay your message.
+Here is an example.
+This is a three-dimensional bar plot.
+The third dimension adds nothing, only confusion.
+So in general, avoid pseudo 3D plots, and even more avoid
+gratuitous 3D plots.
+
+
+---
+
+#### Section 5: Data Visualization Principles   5.3 Data Visualization Principles, Part 3   Avoid Too Many Significant Digits
