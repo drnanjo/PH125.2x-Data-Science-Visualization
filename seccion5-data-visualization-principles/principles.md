@@ -488,3 +488,169 @@ We also get an idea of the overall value from the x-axis.
 ---
 
 ####  Section 5: Data Visualization Principles   5.3 Data Visualization Principles, Part 3   Encoding a Third Variable
+
+ We previously showed a scatterplot
+showing the relationship between infant survival rates and average income.
+Here's a version of this plot where we encode
+three more variables, OPEC membership, region, and population size.
+Note that we encode categorical variables with color hue and shape.
+These shapes can be controlled with a shape argument.
+Here are the shapes available for use in R. Note that for the last five,
+the color goes inside.
+For continuous variables, we can use color, intensity, or size.
+In the next video, we're going to show a case
+study that demonstrates how to do this.
+
+
+---
+
+#### Section 5: Data Visualization Principles   5.3 Data Visualization Principles, Part 3   Case Study: Vaccines
+
+Vaccines have helped save millions of lives.
+In the 19th century, before herd immunization
+was achieved through vaccination programs,
+deaths from infectious diseases, like smallpox and polio, were common.
+However, today, despite all the scientific evidence
+for their importance, vaccination programs
+have become somewhat controversial.
+The controversy started with a paper published in 1988
+and led by Andrew Wakefield claiming there
+was a link between the administration of the measles, mumps, and rubella MMR
+vaccine, and the appearance of autism and bowel disease.
+Despite much scientific evidence contradicting this finding,
+sensationalist media reports and fear mongering from conspiracy theories
+lead parts of the public to believe that vaccines were harmful.
+Some parents even stopped vaccinating their children.
+
+This dangerous practice can be potentially disastrous,
+given that the Center for Disease Control, CDC,
+estimates that vaccination will prevent more than 21
+million hospitalizations and 732,000 deaths
+among children born in the last 20 years.
+
+The 1988 paper has since been retracted, and Andrew Wakefield
+was eventually struck off the UK medical register with a statement
+and identifying deliberate falsification in the research published
+in The Lancet, and was thereby barred from practicing medicine in the UK.
+Yet misconceptions persist, in part, due to self-proclaimed activists
+that continue to dispel misinformation about vaccines.
+Effective communication of data is a strong antidote
+to misinformation and fear mongering.
+
+Earlier we showed an example provided by the Wall Street Journal
+showing data related to the impact of vaccines
+on battling infectious diseases.
+Here we reconstruct that example.
+The data used in these plots were collected, organized,
+and distributed by the Tycho project.
+They include weekly reported counts data for 7 diseases from 1928 to 2011
+from all 50 states.
+We include the yearly totals in the DS labs package.
+You can get it like this and look at the structure using this command.
+
+    data(us_contagious_diseases)
+    str(us_contagious_diseases)
+
+For the plot there we're going to make in this video,
+we create a temporary object called dat that stores all the measles data.
+It includes a per 100,000 rate, orders states by average value of disease,
+and removes Alaska and Hawaii, since they only
+became states in the late 50s.
+    
+    the_disease <- "Measles"
+    dat <- us_contagious_diseases %>% 
+           filter(!state %in% c("Hawaii", "Alaska") & disease == the_disease) %>%
+           mutate(rate = count / population * 10000) %>%
+           mutate(state = reorder(state, rate))
+
+Here's the code where we define that.
+We can now easily plot disease rates for per year.
+Here are the measles data for California.
+
+    dat %>% filter(state == "California") %>%
+            ggplot(aes(year, rate)) + 
+            geom_line() + ylab("Cases per 100,000") +
+            geom_vline(xintercept = 1963, col = "blue")
+
+
+We can use this simple code to show it.
+We add a vertical line at 1963, since this
+is when the vaccine was introduced.
+Now can we show data for all states in one plot?
+We have three variables to show, year, state, and rate.
+In the Wall Street Journal figure, they use the x-axis
+for year, the y-axis for state, and color hue represent rates.
+We're using color to represent a continuous variable.
+
+However, the color scale they use, which goes
+from yellow to blue to green to orange to red can be improved.
+When choosing colors to quantify a numeric variable,
+we choose between two options, `sequential` and `diverging`.
+
+Sequential palettes are suited for data that goes from high to low.
+High values are clearly distinguished from the low values.
+Here are some examples offered by the package R color Brewer.
+    
+    library(RColorBrewer)
+    display.brewer.all(type = "seq")
+
+On the other hand, diverging colors are used
+to represent values that verge from a center.
+We put equal emphasis on both ends of the data range, higher than the center
+and lower than the center.
+An example of when we would use a divergent pattern
+would be if we were to show heights and standard deviations away
+from the average.
+
+    > display.brewer.all(type = "div")
+
+Here is an example of divergent patterns available from R Color Brewer.
+In our example, we want to use a sequential palette
+since there is no meaningful center, just low and high rates.
+We use the geometry 
+
+    geom_tile()
+
+to tile the region
+with colors representing disease rates.
+We use square root transformation to avoid
+having the really high counts dominate the plot.
+Here's the code that generates a very nice and impactful plot.
+
+    dat %>% ggplot(aes(year, state, fill = rate)) + 
+            geom_tile(color="grey50") + 
+            scale_x_continuous(expand=c(0,0)) +
+            scale_fill_gradientn(colors = brewer.pal(9, "Reds"), trans = "sqrt") + 
+            geom_vline(xintercept=1963, col="blue") + 
+            theme_minimal() + theme(panel.grid = element_blank()) +
+            ggtitle(the_disease) +
+            ylab("") +
+            xlab("")
+
+This plot makes a very striking argument for the contribution of vaccines.
+However, one limitation of this plot is that it uses color
+to represent quantity, which we earlier explained makes it a bit harder to know
+exactly how high it is going.
+
+Position and lens are better cues.
+If we are willing to lose data information,
+we can make a version of the plot that shows the values with position.
+We can also show the average for the US, which we compute like this.
+    
+    avg <- us_contagious_diseases %>% 
+           filter(disease == the_disease) %>% group_by(year) %>%
+           summarize(us_rate = sum(count, na.rm=TRUE) / sum(population, na.rm=TRUE) * 10000)
+
+Now to make the plot, we simply use the geom_line geometry.
+We are going to make every state the same color.
+This is because it's harder to choose 50 distinct colors.
+However, the plot is very impactful.
+It shows very clearly how after the vaccine was introduced
+the rates went down across all states.
+It shows the same information as our previous plot,
+but now we can actually see what the values are.
+
+
+--- 
+
+####
