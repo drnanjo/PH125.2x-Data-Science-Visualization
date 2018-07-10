@@ -691,3 +691,45 @@ gratuitous 3D plots.
 ---
 
 #### Section 5: Data Visualization Principles   5.3 Data Visualization Principles, Part 3   Avoid Too Many Significant Digits
+
+ By default, statistical software like R
+returns many significant digits.
+The principle we're about to discuss relates to tables, not graphs,
+and it's to avoid too many statistical digits.
+
+The default behavior in R is to show seven significant digits.
+So many digits often adds no information,
+and the visual clutter makes it hard for the consumer of your table
+to understand the message.
+
+As an example, here the per 10,000 disease
+rates for California across five decades.
+We are reporting positions of up to 0.00001 cases per 10,000,
+a very small value in the context of the changes that are occurring across
+the dates.
+In this case, two significant figures is more than enough and makes the point
+that the rates are decreasing.
+
+Useful functions in R to change the number of significant digits
+or to round numbers are 
+
+    signif
+
+and
+    round
+
+You can define the number of significant digits
+to use globally by setting an option.
+You can do it like this.
+
+    options(digits=n)
+
+Another principle related to displaying tables
+is the place values being compared on columns rather than rows.
+Here's what the table would look like if we placed the numbers being
+compared horizontally.
+It's a little bit harder to make the comparison.
+
+---
+
+#### Section 5: Data Visualization Principles   5.3 Data Visualization Principles, Part 3   Assessment: Data Visualization Principles, Part 3
