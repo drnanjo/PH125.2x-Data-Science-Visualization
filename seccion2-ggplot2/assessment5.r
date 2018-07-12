@@ -265,3 +265,99 @@ Create a ggplot object called p using the pipe to assign the heights data to a g
 Assign height to the x values through the aes function.
 
 "
+# define p here
+p <- heights %>% ggplot(aes(x=height))
+
+"Exercise 17. Histograms 2
+Now we are ready to add a layer to actually make the histogram.
+
+Add a layer to the object p (created in the previous exercise) using the geom_histogram function to make the histogram."
+
+p <- heights %>% 
+  ggplot(aes(height))
+## add a layer to p
+p + geom_histogram()
+
+
+"Exercise 18. Histogram binwidth
+Note that when we run the code from the previous exercise we get the following warning:
+
+stat_bin() using bins = 30. Pick better value with binwidth.
+
+
+Use the binwidth argument to change the histogram made in the previous exercise to use bins of size 1 inch.
+"
+p <- heights %>% 
+  ggplot(aes(height))
+## add the geom_histogram layer but with the requested argument
+p + geom_histogram(binwidth=1)
+
+"Exercise 19. Smooth density plot
+Now instead of a histogram we are going to make a smooth density plot. In this case, we will not make an 
+object p. Instead we will render the plot using a single line of code. In the previous exercise, we could 
+have created a histogram using one line of code like this:
+
+heights %>% 
+  ggplot(aes(height)) +
+  geom_histogram()
+Now instead of geom_histogram we will use geom_density to create a smooth density plot.
+
+Add the appropriate layer to create a smooth density plot of heights.
+"
+
+## add the correct layer using +
+heights %>% 
+  ggplot(aes(height)) + geom_density()
+  
+"Exercise 20. Two smooth density plots
+Now we are going to make density plots for males and females separately. We can do this using the group 
+argument within the aes mapping. Because each point will be assigned to a different density depending on 
+a variable from the dataset, we need to map within aes.
+
+Create separte smooth density plots for males and females by defining group by sex.
+
+"
+
+## add the group argument then a layer with +
+heights %>% 
+  ggplot(aes(height, group=sex)) + geom_density()
+  
+  
+"Exercise 21. Two smooth density plots 2
+In the previous exercise we made the two density plots, one for each sex, using:
+
+heights %>% 
+  ggplot(aes(height, group = sex)) + 
+  geom_density()
+We can also assign groups through the color or fill argument. For example, if you type color = sex ggplot 
+knows you want a different color for each sex. So two densities must be drawn. You can therefore skip the 
+group = sex mapping. Using color has the added benefit that it uses color to distinguish the groups.
+
+Change the density plots from the previous exercise to add color.
+"
+
+## edit the next line to use color instead of group then add a density layer
+heights %>% 
+  ggplot(aes(height, color = sex)) + geom_density()
+  
+  
+"Exercise 22. Two smooth density plots 3
+We can also assign groups using the fill argument. When using the geom_density geometry, color creates a 
+colored line for the smooth density plot while fill colors in the area under the curve.
+
+We can see what this looks like by running the following code:
+
+heights %>% 
+  ggplot(aes(height, fill = sex)) + 
+  geom_density() 
+However, here the second density is drawn over the other. We can change this by using something called 
+alpha blending.
+
+Set the alpha parameter to 0.2 in the geom_density function to make this change.
+"
+  
+heights %>% 
+  ggplot(aes(height, fill = sex)) + 
+  geom_density(alpha=0.2)
+  
+  
