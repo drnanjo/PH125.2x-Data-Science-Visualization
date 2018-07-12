@@ -39,3 +39,25 @@ female_percentiles <- quantile(female, seq(.1, .9, .2))
 df <- data.frame(female = female_percentiles, male = male_percentiles) 
 df
 
+
+
+"Exercise 3. Interpretating Boxplots - 1
+Study the boxplots summarizing the distributions of populations sizes by country.
+
+Which continent has the country with the largest population size?"
+
+
+"Exercise 4. Interpretating Boxplots - 2
+Study the boxplots summarizing the distributions of populations sizes by country.
+
+Which continent has median country with the largest population?"
+
+"Exercise 5. Interpreting Boxplots - 3
+Again, look at the boxplots summarizing the distributions of populations sizes by country. To the nearest million, what is the median population size for Africa?"
+
+"Exercise 6. Low quantiles
+Examine the following boxplots and report approximately what proportion of countries in Europe have populations below 14 million:"
+
+"Exercise 7. Interquantile Range (IQR)
+Based on the boxplot, if we use a log transformation, which continent shown below has the largest interquartile range?"
+
