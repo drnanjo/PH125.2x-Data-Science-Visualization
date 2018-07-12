@@ -279,6 +279,9 @@ gapminder <- gapminder %>%
               mutate(dollars_per_day = gdp/population/365) %>% 
               filter(continent == "Africa" & 
                       year %in% c("1970","2010") & 
+                      !is.na(infant_mortality)& 
                       !is.na(dollars_per_day)) %>% 
-              ggplot(aes(dollars_per_day, infant_mortality, color = region)) +
-              scale_x_continuous(trans = "log2")
+              ggplot(aes(dollars_per_day, infant_mortality, color = region))
+
+gapminder  + scale_x_continuous(trans = "log2") + geom_point() + facet_grid(year ~ .)
+
